@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+/* ── Base ─────────────────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  /* Space nebula — fond fixe, plusieurs couches */
+  background-color: #050010;
+  background-image:
+    radial-gradient(ellipse 70% 50% at 50% 0%,   rgba(120,40,220,0.38) 0%, transparent 65%),
+    radial-gradient(ellipse 45% 35% at 85% 25%,  rgba(0,180,220,0.18)  0%, transparent 55%),
+    radial-gradient(ellipse 55% 40% at 8%  70%,  rgba(100,20,200,0.22) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 30% at 92% 80%,  rgba(0,200,180,0.12)  0%, transparent 50%),
+    radial-gradient(ellipse 100% 100% at 50% 50%, #0c0028 0%, #050010 55%, #020008 100%);
+  background-attachment: fixed;
+}
+
+/* ── Animations scroll ────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.anim-fade-up  { animation: fadeUp  0.65s ease both; }
+.anim-fade-in  { animation: fadeIn  0.5s  ease both; }
+.anim-delay-1  { animation-delay: 0.1s; }
+.anim-delay-2  { animation-delay: 0.2s; }
+.anim-delay-3  { animation-delay: 0.35s; }
+.anim-delay-4  { animation-delay: 0.5s; }
+
+/* ── Scrollbar ────────────────────────────────────────────────── */
+::-webkit-scrollbar              { width: 5px; }
+::-webkit-scrollbar-track        { background: #050010; }
+::-webkit-scrollbar-thumb        { background: rgba(168,85,247,0.45); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover  { background: rgba(168,85,247,0.75); }
+
+/* ── Neon text helper ─────────────────────────────────────────── */
+.neon-violet { text-shadow: 0 0 20px rgba(168,85,247,0.6), 0 0 40px rgba(168,85,247,0.3); }
+.neon-cyan   { text-shadow: 0 0 20px rgba(34,211,238,0.6),  0 0 40px rgba(34,211,238,0.3);  }
