@@ -18,6 +18,7 @@ Typographie : Utiliser une police sans-serif moderne (ex: 'Inter', 'Roboto').
 3. Structure des Pages (Composants Réutilisables)
 Toutes les pages doivent utiliser les mêmes composants de base issus de MUI pour assurer l'unité :
 Layout Global : Un wrapper incluant la Navbar et le Footer.
+Background: utiliser l'image dans docs Smartphone futuriste dans l’espace.png comme fond de page, et mettre les textes/images boutons flottants par dessus.
 Hero Section : Utiliser Grid2 (MUI) pour séparer le texte (gauche) et l'illustration mobile (droite).
 Feature Cards : Utiliser le composant Card de MUI personnalisé avec un effet de verre (Glassmorphism) et des bordures néon.
 Auth Pages (Login/Register) : * Créer des vues statiques avec TextField (MUI) stylisés.
@@ -44,3 +45,5 @@ Police : Sans-serif moderne et épurée (type Inter ou Montserrat).
 /src/components/ : Boutons personnalisés, Navbar, Footer, Cards.
 /src/pages/ : Home.jsx, Login.jsx, Register.jsx.
 /src/styles/ : Fichiers .css séparés pour les styles globaux et les animations de fond.
+
+dans Docs le fichier Maquette.png donne une idée du type de site visé et surtout de la DA mais il ne faut pas "coder la maquette" elle sert plutot d'idée général pour bien comprendre l'organisation de la page principale, les couleurs et effets visés.
