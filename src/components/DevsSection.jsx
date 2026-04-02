@@ -14,7 +14,7 @@ import SecurityIcon from '@mui/icons-material/Security';
 
 const DEVS = [
   {
-    initials: 'FL',
+    initials: 'FLO',
     name: 'Florent',
     role: 'Co-fondateur · Lead Dev Frontend',
     color: '#00e5ff',
@@ -30,7 +30,7 @@ const DEVS = [
     delay: '0s',
   },
   {
-    initials: 'SB',
+    initials: 'SIM',
     name: 'Simon',
     role: 'Co-fondateur · Lead Dev Backend',
     color: '#ff00c8',

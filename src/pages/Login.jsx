@@ -1,18 +1,26 @@
 import { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate, useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
+import Alert from '@mui/material/Alert';
+import CircularProgress from '@mui/material/CircularProgress';
 import InputAdornment from '@mui/material/InputAdornment';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { login } from '../api/auth';
 
 export default function Login() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const justRegistered = location.state?.registered === true;
   const [values, setValues] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
+  const [apiError, setApiError] = useState('');
+  const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   const validate = (vals) => {
@@ -27,25 +35,33 @@ export default function Login() {
     const next = { ...values, [field]: ev.target.value };
     setValues(next);
     if (submitted) setErrors(validate(next));
+    if (apiError) setApiError('');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitted(true);
     const errs = validate(values);
     setErrors(errs);
-    // Pas d'appel API — statique
+    if (Object.keys(errs).length > 0) return;
+
+    setLoading(true);
+    setApiError('');
+    try {
+      const data = await login(values.email, values.password);
+      localStorage.setItem('token', data.token ?? '');
+      localStorage.setItem('refresh_token', data.refresh_token ?? '');
+      localStorage.setItem('user', JSON.stringify(data.user ?? {}));
+      navigate('/profile');
+    } catch (err) {
+      setApiError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <Box
-      sx={{
-        minHeight: 'calc(100vh - 64px)',
-        display: 'flex',
-        alignItems: 'center',
-        py: 6,
-      }}
-    >
+    <Box sx={{ minHeight: 'calc(100vh - 64px)', display: 'flex', alignItems: 'center', py: 6 }}>
       <Container maxWidth="sm">
         <Box
           sx={{
@@ -78,12 +94,7 @@ export default function Login() {
               component="img"
               src="/logo_re_detour.png"
               alt="RE:"
-              sx={{
-                width: 56,
-                height: 56,
-                mb: 1.5,
-                filter: 'drop-shadow(0 0 12px rgba(0,229,255,0.55))',
-              }}
+              sx={{ width: 56, height: 56, mb: 1.5, filter: 'drop-shadow(0 0 12px rgba(0,229,255,0.55))' }}
             />
             <Typography variant="h4" sx={{ fontWeight: 800, mb: 0.5 }}>
               Se{' '}
@@ -98,6 +109,17 @@ export default function Login() {
 
           {/* Formulaire */}
           <Box component="form" onSubmit={handleSubmit} noValidate>
+            {justRegistered && (
+              <Alert severity="success" sx={{ mb: 2.5, borderRadius: '12px', fontSize: '0.88rem' }}>
+                Compte créé ! Tu peux maintenant te connecter.
+              </Alert>
+            )}
+            {apiError && (
+              <Alert severity="error" sx={{ mb: 2.5, borderRadius: '12px', fontSize: '0.88rem' }}>
+                {apiError}
+              </Alert>
+            )}
+
             <TextField
               fullWidth
               label="Adresse email"
@@ -106,6 +128,7 @@ export default function Login() {
               onChange={handleChange('email')}
               error={Boolean(errors.email)}
               helperText={errors.email}
+              disabled={loading}
               slotProps={{
                 input: {
                   startAdornment: (
@@ -125,6 +148,7 @@ export default function Login() {
               onChange={handleChange('password')}
               error={Boolean(errors.password)}
               helperText={errors.password}
+              disabled={loading}
               slotProps={{
                 input: {
                   startAdornment: (
@@ -143,9 +167,10 @@ export default function Login() {
               color="secondary"
               size="large"
               fullWidth
+              disabled={loading}
               sx={{ mb: 2.5, py: 1.4, fontSize: '1rem' }}
             >
-              SE CONNECTER
+              {loading ? <CircularProgress size={22} color="inherit" /> : 'SE CONNECTER'}
             </Button>
 
             <Typography sx={{ textAlign: 'center', color: 'rgba(255,255,255,0.45)', fontSize: '0.88rem' }}>

@@ -75,7 +75,7 @@ export default function Home() {
               >
                 RE
               </Box>{' '}
-              Trouver quoi regarder,
+              Trouver quoi regarder
               <Box component="span" sx={{ display: 'block' }}>
                 grâce à{' '}
                 <Box

@@ -42,11 +42,6 @@ const theme = createTheme({
     borderRadius: 12,
   },
   components: {
-    MuiCssBaseline: {
-      styleOverrides: `
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-      `,
-    },
     MuiButton: {
       styleOverrides: {
         root: {
