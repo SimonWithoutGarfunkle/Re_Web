@@ -1,4 +1,5 @@
-import { Link as RouterLink } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
@@ -23,6 +24,21 @@ const magentaButtonSx = {
 };
 
 export default function Home() {
+  const location = useLocation();
+
+  useEffect(() => {
+    const id = location.state?.scrollTo;
+    if (!id) return;
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      // Retry once DOM is ready
+      const t = setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }), 100);
+      return () => clearTimeout(t);
+    }
+  }, [location.state]);
+
   return (
     <Box>
 

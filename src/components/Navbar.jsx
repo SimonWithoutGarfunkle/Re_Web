@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate, useLocation } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Box from '@mui/material/Box';
@@ -23,9 +23,6 @@ const NAV_LINKS = [
   { label: 'Les Développeurs', id: 'developpeurs' },
 ];
 
-const scrollTo = (id) => {
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-};
 
 // Bouton S'inscrire — magenta néon
 const magentaButtonSx = {
@@ -48,6 +45,16 @@ export default function Navbar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleNavClick = (id) => {
+    if (location.pathname === '/') {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      navigate('/', { state: { scrollTo: id } });
+    }
+  };
 
   return (
     <>
@@ -89,7 +96,7 @@ export default function Navbar() {
               {NAV_LINKS.map((link) => (
                 <Button
                   key={link.label}
-                  onClick={() => scrollTo(link.id)}
+                  onClick={() => handleNavClick(link.id)}
                   sx={{
                     color: 'rgba(255,255,255,0.75)',
                     fontWeight: 500,
@@ -187,7 +194,7 @@ export default function Navbar() {
           {NAV_LINKS.map((link) => (
             <ListItem key={link.label} disablePadding>
               <ListItemButton
-                onClick={() => { scrollTo(link.id); setDrawerOpen(false); }}
+                onClick={() => { handleNavClick(link.id); setDrawerOpen(false); }}
                 sx={{ py: 1.5, px: 3, '&:hover': { bgcolor: 'rgba(176, 38, 255, 0.08)' } }}
               >
                 <ListItemText

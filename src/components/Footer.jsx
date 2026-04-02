@@ -2,7 +2,9 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import Link from '@mui/material/Link';
+import { Link as RouterLink } from 'react-router-dom';
 import Apple from '@mui/icons-material/Apple';
+import Android from '@mui/icons-material/Android';
 
 export default function Footer() {
   return (
@@ -33,23 +35,23 @@ export default function Footer() {
           href="#"
           underline="none"
           sx={{
-            color: 'rgba(255,255,255,0.45)',
-            fontSize: '0.78rem',
+            color: 'rgba(255,255,255,0.7)',
+            fontSize: '0.88rem',
             transition: 'color 0.2s',
-            '&:hover': { color: 'rgba(255,255,255,0.85)' },
+            '&:hover': { color: '#fff' },
           }}
         >
           Mentions légales
         </Link>
-        <Typography sx={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.78rem' }}>|</Typography>
+        <Typography sx={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.88rem' }}>|</Typography>
         <Link
           href="#"
           underline="none"
           sx={{
-            color: 'rgba(255,255,255,0.45)',
-            fontSize: '0.78rem',
+            color: 'rgba(255,255,255,0.7)',
+            fontSize: '0.88rem',
             transition: 'color 0.2s',
-            '&:hover': { color: 'rgba(255,255,255,0.85)' },
+            '&:hover': { color: '#fff' },
           }}
         >
           Politique de confidentialité
@@ -58,15 +60,16 @@ export default function Footer() {
 
       {/* Right — copyright + App Store icon */}
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-        <Typography sx={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.78rem', mr: 0.5 }}>
+        <Typography sx={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.88rem', mr: 0.5 }}>
           © 2026
         </Typography>
         <IconButton
           size="small"
-          href="#"
+          component={RouterLink}
+          to="/ios"
           aria-label="App Store"
           sx={{
-            color: 'rgba(255,255,255,0.45)',
+            color: 'rgba(255,255,255,0.7)',
             transition: 'all 0.2s',
             '&:hover': {
               color: '#fff',
@@ -75,7 +78,23 @@ export default function Footer() {
             },
           }}
         >
-          <Apple sx={{ fontSize: 18 }} />
+          <Apple sx={{ fontSize: 22 }} />
+        </IconButton>
+        <IconButton
+          size="small"
+          href="#"
+          aria-label="Google Play"
+          sx={{
+            color: 'rgba(255,255,255,0.7)',
+            transition: 'all 0.2s',
+            '&:hover': {
+              color: '#fff',
+              bgcolor: 'rgba(255,255,255,0.06)',
+              filter: 'drop-shadow(0 0 6px rgba(255,255,255,0.4))',
+            },
+          }}
+        >
+          <Android sx={{ fontSize: 22 }} />
         </IconButton>
       </Box>
     </Box>
