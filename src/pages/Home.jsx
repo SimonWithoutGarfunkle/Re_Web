@@ -66,47 +66,44 @@ export default function Home() {
                 fontWeight: 800,
                 lineHeight: 1.1,
                 mb: 3,
+                textShadow: '0 2px 18px rgba(0,0,0,0.95), 0 0 40px rgba(0,0,0,0.7)',
               }}
             >
               <Box
                 component="span"
-                sx={{ color: '#00e5ff', textShadow: '0 0 28px rgba(0,229,255,0.7)' }}
+                sx={{ color: '#00e5ff', textShadow: '0 0 28px rgba(0,229,255,0.7), 0 2px 18px rgba(0,0,0,0.95)' }}
               >
-                RE:
+                RE
               </Box>{' '}
-              La Culture,
+              Trouver quoi regarder,
               <Box component="span" sx={{ display: 'block' }}>
-                Version{' '}
+                grâce à{' '}
                 <Box
                   component="span"
-                  sx={{ color: '#ff00c8', textShadow: '0 0 28px rgba(255,0,200,0.75)' }}
+                  sx={{ color: '#ff00c8', textShadow: '0 0 28px rgba(255,0,200,0.75), 0 2px 18px rgba(0,0,0,0.95)' }}
                 >
-                  Privée
-                </Box>{' '}
-                entre{' '}
-                <Box
-                  component="span"
-                  sx={{ color: '#ff00c8', textShadow: '0 0 28px rgba(255,0,200,0.75)' }}
-                >
-                  Amis
-                </Box>{' '}
-                !
+                  tes proches
+                </Box>
               </Box>
             </Typography>
 
             <Typography
               variant="body1"
               sx={{
-                color: 'rgba(255,255,255,0.65)',
+                color: 'rgba(255,255,255,0.9)',
                 fontSize: { xs: '1rem', md: '1.15rem' },
                 lineHeight: 1.75,
                 mb: 5,
                 maxWidth: 540,
                 mx: 'auto',
+                textShadow: '0 1px 12px rgba(0,0,0,1), 0 0 30px rgba(0,0,0,0.8)',
               }}
             >
-              Partage tes films, séries et livres favoris dans un espace privé réservé à tes proches.
-              Zéro algorithme, zéro publicité — juste toi et tes amis.
+              Des centaines de suggestions partout… et pourtant rien à lancer.
+              <Box component="span" sx={{ display: 'block', mt: 1.5 }}>
+                RE: te montre ce que tes amis aiment vraiment.
+                Pas d'algo. Pas de bruit. Juste des recommandations qui comptent vraiment.
+              </Box>
             </Typography>
 
             <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', justifyContent: 'center' }}>

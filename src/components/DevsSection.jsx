@@ -20,8 +20,8 @@ const DEVS = [
     color: '#00e5ff',
     glowColor: 'rgba(0, 229, 255, 0.3)',
     borderColor: 'rgba(0, 229, 255, 0.3)',
-    bio: "Cinéphile obsessionnel et passionné d'UX, Florent est à l'origine du concept RE:. Convaincu que les réseaux sociaux classiques tuent la vraie conversation culturelle, il a voulu créer un espace intime où partager ses coups de cœur a encore du sens.",
-    anecdote: "« J'ai eu l'idée de RE: après avoir perdu une recommandation de film dans un fil Instagram de 500 posts. »",
+    bio: "Cinéphile obsessionnel et passionné d'UX, Florent est à l'origine de RE:. Son constat : les réseaux actuels noient les recommandations dans trop de bruit. RE: est né d'une envie simple : retrouver des échanges culturels qui ont du sens.",
+    anecdote: "« J'en avais marre de perdre des bonnes recos dans des feeds interminables. »",
     tags: [
       { label: 'React / Vite', Icon: CodeIcon },
       { label: 'React Native', Icon: PhoneIphoneIcon },
@@ -36,8 +36,8 @@ const DEVS = [
     color: '#ff00c8',
     glowColor: 'rgba(255, 0, 200, 0.3)',
     borderColor: 'rgba(255, 0, 200, 0.3)',
-    bio: "Grand sériephile et lecteur insatiable, Simon a rejoint l'aventure pour poser les fondations solides de RE:. Architecte dans l'âme, il s'assure que chaque cercle privé reste privé — sécurité, performance et scalabilité sont ses obsessions.",
-    anecdote: "« Pour moi une bonne archi, c'est comme une bonne série : tout doit tenir dans la durée. »",
+    bio: "Passionné de séries et de lecture, Simon construit les fondations de RE:. Son rôle : rendre l'expérience fluide, fiable et durable, sans compromis sur la simplicité. Parce qu'un bon produit, ça doit tenir dans le temps.",
+    anecdote: "« Si l'app disparaît, tes recos disparaissent. Donc elle ne doit jamais tomber. »",
     tags: [
       { label: 'Node.js / API', Icon: StorageIcon },
       { label: 'PostgreSQL', Icon: StorageIcon },
@@ -68,7 +68,7 @@ export default function DevsSection() {
             </Box>
           </Typography>
           <Typography sx={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.95rem', maxWidth: 480, mx: 'auto' }}>
-            Deux passionnés de culture et de code derrière l'aventure RE:
+            Deux devs, une frustration simple : ne jamais savoir quoi regarder ou lire malgré trop de choix.
           </Typography>
           <Box
             sx={{

@@ -6,13 +6,14 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import SecurityIcon from '@mui/icons-material/Security';
 import CodeIcon from '@mui/icons-material/Code';
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 
 const FEATURES = [
   {
     type: 'logo',
-    title: "Re: C'est Quoi ?",
+    title: 'Un réseau culturel, pas social',
     description:
-      "Un réseau social privé de découvertes culturelles. Films, séries, livres — partage ce qui te passionne avec ceux qui comptent.",
+      "Ici, on partage surtout ce qu'on regarde, ce qu'on lit, ce qu'on aime. RE: est centré sur une seule chose : les œuvres qui te marquent.",
     color: '#b026ff',
     glowColor: 'rgba(176, 38, 255, 0.35)',
     borderColor: 'rgba(176, 38, 255, 0.4)',
@@ -21,9 +22,9 @@ const FEATURES = [
   {
     type: 'icon',
     Icon: SecurityIcon,
-    title: 'Un Cercle Privé',
+    title: 'Les bonnes personnes, pour des recommandations qui comptent',
     description:
-      'Partage tes passions uniquement avec tes amis proches. Confidentialité totale, zéro algorithme, zéro publicité.',
+      "Pas besoin de 1000 contacts. Fini le scroll infini : ici, chaque reco a une raison de t'intéresser.",
     color: '#00e5ff',
     glowColor: 'rgba(0, 229, 255, 0.3)',
     borderColor: 'rgba(0, 229, 255, 0.35)',
@@ -32,13 +33,24 @@ const FEATURES = [
   {
     type: 'icon',
     Icon: CodeIcon,
-    title: 'Qui Suis-Je ?',
+    title: 'Zéro algorithme',
     description:
-      "Découvre le développeur passionné derrière l'appli, son parcours et sa vision d'un réseau social différent.",
+      "Pas de machine qui te pousse toujours les mêmes contenus. Sur RE:, tout vient d'humains. Des goûts réels. Des avis sincères. Des recommandations qui ont du sens.",
     color: '#ff00c8',
     glowColor: 'rgba(255, 0, 200, 0.3)',
     borderColor: 'rgba(255, 0, 200, 0.35)',
     delay: '0.3s',
+  },
+  {
+    type: 'icon',
+    Icon: SportsEsportsIcon,
+    title: 'Un réseau vivant',
+    description:
+      "Quiz, défis, mini-jeux… RE: ne se contente pas de montrer des avis. Il crée des interactions autour de la culture.",
+    color: '#7c4dff',
+    glowColor: 'rgba(124, 77, 255, 0.3)',
+    borderColor: 'rgba(124, 77, 255, 0.35)',
+    delay: '0.45s',
   },
 ];
 
@@ -66,7 +78,7 @@ export default function FeatureCards() {
             <Box component="span" sx={{ color: '#00e5ff', textShadow: '0 0 18px rgba(0,229,255,0.6)' }}>
               RE:
             </Box>{' '}
-            ?
+            change la donne ?
           </Typography>
           <Box
             sx={{
@@ -82,7 +94,7 @@ export default function FeatureCards() {
         {/* Cards grid */}
         <Grid container spacing={3}>
           {FEATURES.map((feature, i) => (
-            <Grid key={i} size={{ xs: 12, sm: 4 }}>
+            <Grid key={i} size={{ xs: 12, sm: 6, md: 3 }}>
               <Card
                 sx={{
                   height: '100%',
