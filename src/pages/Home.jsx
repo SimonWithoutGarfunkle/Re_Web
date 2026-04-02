@@ -101,7 +101,7 @@ export default function Home() {
             >
               Des centaines de suggestions partout… et pourtant rien à lancer.
               <Box component="span" sx={{ display: 'block', mt: 1.5 }}>
-                RE: te montre ce que tes amis aiment vraiment.
+                RE te montre ce que tes amis aiment vraiment.
                 Pas d'algo. Pas de bruit. Juste des recommandations qui comptent vraiment.
               </Box>
             </Typography>

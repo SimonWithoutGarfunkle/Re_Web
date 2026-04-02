@@ -76,7 +76,7 @@ export default function FeatureCards() {
           >
             Pourquoi{' '}
             <Box component="span" sx={{ color: '#00e5ff', textShadow: '0 0 18px rgba(0,229,255,0.6)' }}>
-              RE:
+              RE
             </Box>{' '}
             change la donne ?
           </Typography>

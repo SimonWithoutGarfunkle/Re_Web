@@ -32,7 +32,8 @@ export default function Footer() {
       {/* Left — legal links */}
       <Box sx={{ display: 'flex', gap: { xs: 1.5, md: 3 }, flexWrap: 'wrap', alignItems: 'center' }}>
         <Link
-          href="#"
+          component={RouterLink}
+          to="/mentions-legales"
           underline="none"
           sx={{
             color: 'rgba(255,255,255,0.7)',
@@ -45,7 +46,8 @@ export default function Footer() {
         </Link>
         <Typography sx={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.88rem' }}>|</Typography>
         <Link
-          href="#"
+          component={RouterLink}
+          to="/confidentialite"
           underline="none"
           sx={{
             color: 'rgba(255,255,255,0.7)',
@@ -82,7 +84,9 @@ export default function Footer() {
         </IconButton>
         <IconButton
           size="small"
-          href="#"
+          href="https://play.google.com/store/apps/details?id=fr.re.app"
+          target="_blank"
+          rel="noopener noreferrer"
           aria-label="Google Play"
           sx={{
             color: 'rgba(255,255,255,0.7)',
