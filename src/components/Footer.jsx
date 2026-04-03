@@ -72,6 +72,20 @@ export default function Footer() {
         >
           Contenu
         </Link>
+        <Typography sx={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.88rem' }}>|</Typography>
+        <Link
+          component={RouterLink}
+          to="/contact"
+          underline="none"
+          sx={{
+            color: 'rgba(255,255,255,0.7)',
+            fontSize: '0.88rem',
+            transition: 'color 0.2s',
+            '&:hover': { color: '#fff' },
+          }}
+        >
+          Contact
+        </Link>
       </Box>
 
       {/* Right — copyright + App Store icon */}

@@ -2,7 +2,8 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-import ObfuscatedEmail from '../components/ObfuscatedEmail';
+import MuiLink from '@mui/material/Link';
+import { Link as RouterLink } from 'react-router-dom';
 
 const SECTIONS = [
   {
@@ -41,8 +42,8 @@ const SECTIONS = [
   {
     title: '4. Contact',
     content: 'Pour toute question ou demande concernant vos données personnelles :',
-    footer: 'Email : ',
-    email: true,
+    footer: 'Utilisez notre ',
+    contactLink: true,
   },
 ];
 
@@ -136,7 +137,11 @@ export default function Confidentialite() {
                     }}
                   >
                     {section.footer}
-                    {section.email && <ObfuscatedEmail />}
+                    {section.contactLink && (
+                      <MuiLink component={RouterLink} to="/contact?sujet=Mes données personnelles" sx={{ color: '#b026ff', textDecorationColor: '#b026ff' }}>
+                        formulaire de contact
+                      </MuiLink>
+                    )}
                   </Typography>
                 )}
                 {i < SECTIONS.length - 1 && (

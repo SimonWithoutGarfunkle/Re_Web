@@ -2,7 +2,8 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-import ObfuscatedEmail from '../components/ObfuscatedEmail';
+import MuiLink from '@mui/material/Link';
+import { Link as RouterLink } from 'react-router-dom';
 
 const SECTIONS = [
   {
@@ -13,7 +14,7 @@ const SECTIONS = [
       'Développeur indépendant',
       'France',
     ],
-    linesEmail: true,
+    contactLink: true,
     footer: 'Responsable de la publication : Simon Lefort',
   },
   {
@@ -56,8 +57,8 @@ const SECTIONS = [
   {
     title: '7. Contact',
     content: 'Pour toute question ou demande :',
-    footer: 'Email : ',
-    email: true,
+    footer: 'Utilisez notre ',
+    contactLink: true,
   },
 ];
 
@@ -138,9 +139,12 @@ export default function MentionsLegales() {
                         {line}
                       </Typography>
                     ))}
-                    {section.linesEmail && (
+                    {section.contactLink && (
                       <Typography sx={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.92rem', lineHeight: 1.8 }}>
-                        Email : <ObfuscatedEmail />
+                        Contact :{' '}
+                        <MuiLink component={RouterLink} to="/contact" sx={{ color: '#b026ff', textDecorationColor: '#b026ff' }}>
+                          formulaire de contact
+                        </MuiLink>
                       </Typography>
                     )}
                   </Box>
@@ -155,7 +159,11 @@ export default function MentionsLegales() {
                     }}
                   >
                     {section.footer}
-                    {section.email && <ObfuscatedEmail />}
+                    {section.contactLink && (
+                      <MuiLink component={RouterLink} to="/contact" sx={{ color: '#b026ff', textDecorationColor: '#b026ff' }}>
+                        formulaire de contact
+                      </MuiLink>
+                    )}
                   </Typography>
                 )}
                 {i < SECTIONS.length - 1 && (

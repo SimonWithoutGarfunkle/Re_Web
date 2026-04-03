@@ -8,6 +8,7 @@ import MentionsLegales from './pages/MentionsLegales';
 import Confidentialite from './pages/Confidentialite';
 import PolitiqueContenu from './pages/PolitiqueContenu';
 import Profile from './pages/Profile';
+import Contact from './pages/Contact';
 import spaceBg from '/space-bg.png';
 
 export default function App() {
@@ -26,6 +27,7 @@ export default function App() {
           <Route path="/confidentialite" element={<Confidentialite />} />
           <Route path="/politique-contenu" element={<PolitiqueContenu />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </Layout>
     </BrowserRouter>
