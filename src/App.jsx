@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import IosComingSoon from './pages/IosComingSoon';
 import MentionsLegales from './pages/MentionsLegales';
 import Confidentialite from './pages/Confidentialite';
+import PolitiqueContenu from './pages/PolitiqueContenu';
 import Profile from './pages/Profile';
 import spaceBg from '/space-bg.png';
 
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="/ios" element={<IosComingSoon />} />
           <Route path="/mentions-legales" element={<MentionsLegales />} />
           <Route path="/confidentialite" element={<Confidentialite />} />
+          <Route path="/politique-contenu" element={<PolitiqueContenu />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </Layout>

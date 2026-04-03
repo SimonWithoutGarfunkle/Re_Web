@@ -8,45 +8,50 @@ const SECTIONS = [
   {
     title: null,
     content:
-      "L'application Re permet de partager et découvrir des recommandations culturelles entre amis. Afin de proposer ces fonctionnalités, certaines données personnelles sont nécessaires.",
+      "Re est une application à vocation culturelle permettant de découvrir, partager et recommander des œuvres culturelles entre amis (films, séries, livres, jeux, et contenus assimilés).",
   },
   {
-    title: '1. Données collectées',
-    content: 'Nous collectons uniquement les informations fournies volontairement par l\'utilisateur :',
-    list: [
-      'Adresse email',
-      'Nom d\'utilisateur',
-      'Avatar (optionnel)',
-      'Téléphone (optionnel)',
-      'Date de naissance (optionnel)',
-      'Liste d\'amis (optionnel)',
-      'Recommandations et historique d\'utilisation (optionnel)',
-    ],
-  },
-  {
-    title: '2. Utilisation des données',
-    content: 'Ces données sont utilisées uniquement pour :',
-    list: [
-      'Créer et gérer le compte utilisateur',
-      'Afficher les recommandations entre amis',
-      'Assurer le fonctionnement normal de l\'application',
-    ],
-    footer: 'Nous ne revendons ni ne partageons aucune donnée à des tiers.',
-  },
-  {
-    title: '3. Stockage et Sécurité',
+    title: '1. Nature du contenu autorisé',
     content:
-      'Les données sont stockées sur nos serveurs sécurisés en France. Les utilisateurs peuvent demander la suppression de leur compte et de toutes leurs données à tout moment.',
+      "Les contenus publiés sur Re doivent être directement liés à une œuvre culturelle. L'application n'a pas vocation à devenir un réseau social généraliste.",
+    footer:
+      "Il n'est par exemple pas possible de publier un simple message personnel ou un contenu sans rapport avec une œuvre culturelle identifiable.",
   },
   {
-    title: '4. Contact',
-    content: 'Pour toute question ou demande concernant vos données personnelles :',
-    footer: 'Email : ',
+    title: '2. Contenus interdits',
+    content: 'Les contenus suivants sont strictement interdits :',
+    list: [
+      'Tout contenu illégal ou contraire aux lois en vigueur',
+      'Les propos haineux, diffamatoires ou discriminatoires',
+      "Le harcèlement ou l'intimidation d'autres utilisateurs",
+      'Les contenus violents ou choquants',
+      'Tout contenu à caractère sexuel, et en particulier tout contenu impliquant des mineurs',
+    ],
+  },
+  {
+    title: '3. Sécurité des enfants',
+    content:
+      "Re accorde une importance particulière à la protection des mineurs. Tout contenu impliquant l'exploitation, la sexualisation, le harcèlement ou la mise en danger d'enfants est formellement interdit.",
+    footer:
+      "Les signalements liés à la sécurité des enfants sont traités en priorité et peuvent entraîner la suppression immédiate du contenu concerné ainsi que la suspension ou la suppression du compte utilisateur.",
+  },
+  {
+    title: '4. Sources externes',
+    content:
+      "Les données culturelles affichées dans l'application peuvent provenir de services tiers tels que TMDB (The Movie Database) et OpenLibrary. Re n'est pas responsable du contenu fourni par ces services. Certaines œuvres référencées proviennent de bases de données externes.",
+    footer:
+      "Les visuels associés à ces œuvres (affiches, couvertures) peuvent contenir des éléments susceptibles de heurter la sensibilité de certains utilisateurs. Re s'efforce de limiter l'affichage de contenus sensibles, mais ne peut garantir une absence totale de tels contenus. Les utilisateurs peuvent signaler tout contenu inapproprié par email.",
+  },
+  {
+    title: '5. Modération et signalement',
+    content:
+      "L'application est actuellement en cours de développement. Les outils de modération sont amenés à évoluer.",
+    footer: 'Toute demande de modération ou tout signalement de contenu peut être effectué par email : ',
     email: true,
   },
 ];
 
-export default function Confidentialite() {
+export default function PolitiqueContenu() {
   return (
     <Box sx={{ minHeight: 'calc(100vh - 64px)', py: { xs: 6, md: 8 }, pb: 12 }}>
       <Container maxWidth="md">
@@ -60,7 +65,7 @@ export default function Confidentialite() {
             >
               Politique de{' '}
               <Box component="span" sx={{ color: '#ff00c8', textShadow: '0 0 18px rgba(255,0,200,0.6)' }}>
-                Confidentialité
+                Contenu
               </Box>
             </Typography>
             <Typography sx={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.85rem' }}>
@@ -100,11 +105,7 @@ export default function Confidentialite() {
                   </Typography>
                 )}
                 <Typography
-                  sx={{
-                    color: 'rgba(255,255,255,0.85)',
-                    lineHeight: 1.8,
-                    fontSize: '0.92rem',
-                  }}
+                  sx={{ color: 'rgba(255,255,255,0.85)', lineHeight: 1.8, fontSize: '0.92rem' }}
                 >
                   {section.content}
                 </Typography>

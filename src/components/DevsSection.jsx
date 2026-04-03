@@ -39,7 +39,7 @@ const DEVS = [
     bio: "Passionné de séries et de lecture, Simon construit les fondations de RE:. Son rôle : rendre l'expérience fluide, fiable et durable, sans compromis sur la simplicité. Parce qu'un bon produit, ça doit tenir dans le temps.",
     anecdote: "« Si l'app disparaît, tes recos disparaissent. Donc elle ne doit jamais tomber. »",
     tags: [
-      { label: 'Node.js / API', Icon: StorageIcon },
+      { label: 'PHP / Symfony', Icon: StorageIcon },
       { label: 'PostgreSQL', Icon: StorageIcon },
       { label: 'Sécurité & Infra', Icon: SecurityIcon },
       { label: 'Cloud / Docker', Icon: CloudIcon },

@@ -56,7 +56,21 @@ export default function Footer() {
             '&:hover': { color: '#fff' },
           }}
         >
-          Politique de confidentialité
+          Confidentialité
+        </Link>
+        <Typography sx={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.88rem' }}>|</Typography>
+        <Link
+          component={RouterLink}
+          to="/politique-contenu"
+          underline="none"
+          sx={{
+            color: 'rgba(255,255,255,0.7)',
+            fontSize: '0.88rem',
+            transition: 'color 0.2s',
+            '&:hover': { color: '#fff' },
+          }}
+        >
+          Contenu
         </Link>
       </Box>
 

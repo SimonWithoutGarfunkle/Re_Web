@@ -2,37 +2,62 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
+import ObfuscatedEmail from '../components/ObfuscatedEmail';
 
 const SECTIONS = [
   {
-    title: '1. Éditeur du site',
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    title: "1. Éditeur de l'application",
+    content: "Le présent site et l'application RE: sont édités par :",
+    lines: [
+      'Simon Lefort',
+      'Développeur indépendant',
+      'France',
+    ],
+    linesEmail: true,
+    footer: 'Responsable de la publication : Simon Lefort',
   },
   {
     title: '2. Hébergement',
-    content:
-      'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    content: 'Le site et les services associés sont hébergés par :',
+    lines: [
+      'OVHcloud',
+      'RCS Lille Métropole 424 761 419 00045',
+      'Siège social : 2 rue Kellermann, 59100 Roubaix, France',
+      'Site web : ovhcloud.com',
+    ],
   },
   {
     title: '3. Propriété intellectuelle',
     content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+      "L'ensemble des éléments présents sur le site et l'application RE: (textes, visuels, logo, design, éléments graphiques, code source) sont protégés par le droit de la propriété intellectuelle.",
+    footer:
+      'Toute reproduction, représentation, modification ou exploitation, totale ou partielle, sans autorisation préalable est interdite.',
   },
   {
-    title: '4. Responsabilité',
+    title: '4. Données externes',
     content:
-      'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      "Les informations relatives aux œuvres culturelles (films, séries, livres) affichées dans l'application RE: proviennent de services tiers, notamment TMDB (The Movie Database) et OpenLibrary.",
+    footer:
+      "RE: n'est pas responsable du contenu fourni par ces services externes, notamment en ce qui concerne les visuels (affiches, couvertures), descriptions ou classifications.",
   },
   {
-    title: '5. Liens hypertextes',
+    title: '5. Limitation de responsabilité',
     content:
-      'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+      "RE: s'efforce de fournir des informations aussi précises que possible. Toutefois, l'éditeur ne pourra être tenu responsable des omissions, inexactitudes ou carences dans la mise à jour des informations.",
+    footer: "L'utilisateur est seul responsable de l'utilisation qu'il fait du site et de l'application.",
   },
   {
-    title: '6. Droit applicable',
+    title: '6. Contenus publiés par les utilisateurs',
     content:
-      'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      "Les utilisateurs peuvent publier des contenus dans l'application. Ils sont seuls responsables des contenus qu'ils partagent.",
+    footer:
+      "RE: se réserve le droit de supprimer tout contenu ne respectant pas la politique de contenu ou les lois en vigueur.",
+  },
+  {
+    title: '7. Contact',
+    content: 'Pour toute question ou demande :',
+    footer: 'Email : ',
+    email: true,
   },
 ];
 
@@ -49,7 +74,7 @@ export default function MentionsLegales() {
               sx={{ fontWeight: 800, mb: 1.5, fontSize: { xs: '1.8rem', md: '2.4rem' } }}
             >
               Mentions{' '}
-              <Box component="span" sx={{ color: '#00e5ff', textShadow: '0 0 18px rgba(0,229,255,0.6)' }}>
+              <Box component="span" sx={{ color: '#ff00c8', textShadow: '0 0 18px rgba(255,0,200,0.6)' }}>
                 Légales
               </Box>
             </Typography>
@@ -88,15 +113,51 @@ export default function MentionsLegales() {
                   {section.title}
                 </Typography>
                 <Typography
-                  sx={{
-                    color: 'rgba(255,255,255,0.85)',
-                    lineHeight: 1.8,
-                    fontSize: '0.92rem',
-                    mb: i < SECTIONS.length - 1 ? 0 : 0,
-                  }}
+                  sx={{ color: 'rgba(255,255,255,0.85)', lineHeight: 1.8, fontSize: '0.92rem' }}
                 >
                   {section.content}
                 </Typography>
+                {section.lines && (
+                  <Box
+                    sx={{
+                      mt: 1.5,
+                      mb: section.footer ? 1.5 : 0,
+                      pl: 2,
+                      borderLeft: '2px solid rgba(0,229,255,0.2)',
+                    }}
+                  >
+                    {section.lines.map((line, j) => (
+                      <Typography
+                        key={j}
+                        sx={{
+                          color: 'rgba(255,255,255,0.75)',
+                          fontSize: '0.92rem',
+                          lineHeight: 1.8,
+                        }}
+                      >
+                        {line}
+                      </Typography>
+                    ))}
+                    {section.linesEmail && (
+                      <Typography sx={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.92rem', lineHeight: 1.8 }}>
+                        Email : <ObfuscatedEmail />
+                      </Typography>
+                    )}
+                  </Box>
+                )}
+                {section.footer && (
+                  <Typography
+                    sx={{
+                      color: 'rgba(255,255,255,0.85)',
+                      lineHeight: 1.8,
+                      fontSize: '0.92rem',
+                      mt: section.lines ? 0 : 1,
+                    }}
+                  >
+                    {section.footer}
+                    {section.email && <ObfuscatedEmail />}
+                  </Typography>
+                )}
                 {i < SECTIONS.length - 1 && (
                   <Divider sx={{ borderColor: 'rgba(255,255,255,0.06)', my: 3 }} />
                 )}
