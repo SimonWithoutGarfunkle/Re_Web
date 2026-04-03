@@ -13,7 +13,7 @@ const FEATURES = [
     type: 'logo',
     title: 'Un réseau culturel, pas social',
     description:
-      "Ici, on partage surtout ce qu'on regarde, ce qu'on lit, ce qu'on aime. RE: est centré sur une seule chose : les œuvres qui te marquent.",
+      "Ici, on partage surtout ce qu'on regarde, ce qu'on lit, ce qu'on aime. Re est centré sur une seule chose : les œuvres qui te marquent.",
     color: '#b026ff',
     glowColor: 'rgba(176, 38, 255, 0.35)',
     borderColor: 'rgba(176, 38, 255, 0.4)',
@@ -35,7 +35,7 @@ const FEATURES = [
     Icon: CodeIcon,
     title: 'Zéro algorithme',
     description:
-      "Pas de machine qui te pousse toujours les mêmes contenus. Sur RE:, tout vient d'humains. Des goûts réels. Des avis sincères. Des recommandations qui ont du sens.",
+      "Pas de machine qui te pousse toujours les mêmes contenus. Sur Re, tout vient d'humains. Des goûts réels. Des avis sincères. Des recommandations qui ont du sens.",
     color: '#ff00c8',
     glowColor: 'rgba(255, 0, 200, 0.3)',
     borderColor: 'rgba(255, 0, 200, 0.35)',
@@ -46,7 +46,7 @@ const FEATURES = [
     Icon: SportsEsportsIcon,
     title: 'Un réseau vivant',
     description:
-      "Quiz, défis, mini-jeux… RE: ne se contente pas de montrer des avis. Il crée des interactions autour de la culture.",
+      "Quiz, défis, mini-jeux… Re ne se contente pas de montrer des avis. Il crée des interactions autour de la culture.",
     color: '#7c4dff',
     glowColor: 'rgba(124, 77, 255, 0.3)',
     borderColor: 'rgba(124, 77, 255, 0.35)',
@@ -130,10 +130,10 @@ export default function FeatureCards() {
                       <Box
                         component="img"
                         src="/logo_re_detour.png"
-                        alt="RE:"
+                        alt="Re"
                         sx={{
-                          width: 34,
-                          height: 34,
+                          width: 48,
+                          height: 48,
                           filter: `drop-shadow(0 0 6px ${feature.color})`,
                         }}
                       />

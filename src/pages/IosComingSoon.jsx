@@ -112,7 +112,7 @@ export default function IosComingSoon() {
             </Box>
 
             <Typography variant="h4" sx={{ fontWeight: 800, mb: 1.5, lineHeight: 1.2 }}>
-              RE: arrive sur{' '}
+              Re arrive sur{' '}
               <Box component="span" sx={{ color: '#b026ff', textShadow: '0 0 20px rgba(176,38,255,0.6)' }}>
                 iPhone
               </Box>

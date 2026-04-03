@@ -42,6 +42,55 @@ export async function login(email, password) {
   return res.json();
 }
 
+export async function verifyEmail(token) {
+  const res = await fetch(`${BASE_URL}/api/users/email/verify`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ token }),
+  });
+
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || err.title || 'Une erreur est survenue.');
+  }
+}
+
+export async function resendVerification(email) {
+  await fetch(`${BASE_URL}/api/users/email/resend-verification`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email }),
+  });
+  // Toujours 200 côté back, pas d'erreur exposée
+}
+
+export async function requestPasswordReset(email) {
+  const res = await fetch(`${BASE_URL}/api/reset-password/request`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email }),
+  });
+
+  if (res.status === 429) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || 'Trop de tentatives. Réessaie dans une heure.');
+  }
+  // Tous les autres cas → 200 (anti-énumération)
+}
+
+export async function resetPassword(token, password) {
+  const res = await fetch(`${BASE_URL}/api/reset-password/reset`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ token, password }),
+  });
+
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || err.title || 'Une erreur est survenue.');
+  }
+}
+
 export async function signup(payload) {
   const res = await fetch(`${BASE_URL}/api/auth/register`, {
     method: 'POST',

@@ -8,7 +8,7 @@ import { Link as RouterLink } from 'react-router-dom';
 const SECTIONS = [
   {
     title: "1. Éditeur de l'application",
-    content: "Le présent site et l'application RE: sont édités par :",
+    content: "Le présent site et l'application Re sont édités par :",
     lines: [
       'Simon Lefort',
       'Développeur indépendant',
@@ -30,21 +30,21 @@ const SECTIONS = [
   {
     title: '3. Propriété intellectuelle',
     content:
-      "L'ensemble des éléments présents sur le site et l'application RE: (textes, visuels, logo, design, éléments graphiques, code source) sont protégés par le droit de la propriété intellectuelle.",
+      "L'ensemble des éléments présents sur le site et l'application Re (textes, visuels, logo, design, éléments graphiques, code source) sont protégés par le droit de la propriété intellectuelle.",
     footer:
       'Toute reproduction, représentation, modification ou exploitation, totale ou partielle, sans autorisation préalable est interdite.',
   },
   {
     title: '4. Données externes',
     content:
-      "Les informations relatives aux œuvres culturelles (films, séries, livres) affichées dans l'application RE: proviennent de services tiers, notamment TMDB (The Movie Database) et OpenLibrary.",
+      "Les informations relatives aux œuvres culturelles (films, séries, livres) affichées dans l'application Re proviennent de services tiers, notamment TMDB (The Movie Database) et OpenLibrary.",
     footer:
-      "RE: n'est pas responsable du contenu fourni par ces services externes, notamment en ce qui concerne les visuels (affiches, couvertures), descriptions ou classifications.",
+      "Re n'est pas responsable du contenu fourni par ces services externes, notamment en ce qui concerne les visuels (affiches, couvertures), descriptions ou classifications.",
   },
   {
     title: '5. Limitation de responsabilité',
     content:
-      "RE: s'efforce de fournir des informations aussi précises que possible. Toutefois, l'éditeur ne pourra être tenu responsable des omissions, inexactitudes ou carences dans la mise à jour des informations.",
+      "Re s'efforce de fournir des informations aussi précises que possible. Toutefois, l'éditeur ne pourra être tenu responsable des omissions, inexactitudes ou carences dans la mise à jour des informations.",
     footer: "L'utilisateur est seul responsable de l'utilisation qu'il fait du site et de l'application.",
   },
   {
@@ -52,7 +52,7 @@ const SECTIONS = [
     content:
       "Les utilisateurs peuvent publier des contenus dans l'application. Ils sont seuls responsables des contenus qu'ils partagent.",
     footer:
-      "RE: se réserve le droit de supprimer tout contenu ne respectant pas la politique de contenu ou les lois en vigueur.",
+      "Re se réserve le droit de supprimer tout contenu ne respectant pas la politique de contenu ou les lois en vigueur.",
   },
   {
     title: '7. Contact',
