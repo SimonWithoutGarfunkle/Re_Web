@@ -576,6 +576,13 @@ export default function Profile() {
                           <LockOutlinedIcon sx={{ color: 'rgba(176,38,255,0.5)', fontSize: 20 }} />
                         </InputAdornment>
                       ),
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton onClick={() => setShowPwd((v) => !v)} edge="end" sx={{ color: 'rgba(255,255,255,0.4)' }}>
+                            {showPwd ? <VisibilityOff fontSize="small" /> : <Visibility fontSize="small" />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
                     },
                   }}
                 />
@@ -592,6 +599,13 @@ export default function Profile() {
                     startAdornment: (
                       <InputAdornment position="start">
                         <LockOutlinedIcon sx={{ color: 'rgba(176,38,255,0.5)', fontSize: 20 }} />
+                      </InputAdornment>
+                    ),
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton onClick={() => setShowPwd((v) => !v)} edge="end" sx={{ color: 'rgba(255,255,255,0.4)' }}>
+                          {showPwd ? <VisibilityOff fontSize="small" /> : <Visibility fontSize="small" />}
+                        </IconButton>
                       </InputAdornment>
                     ),
                   },

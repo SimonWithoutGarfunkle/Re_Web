@@ -78,6 +78,20 @@ body {
   text-shadow: 0 0 10px rgba(0, 229, 255, 0.8), 0 0 20px rgba(0, 229, 255, 0.4);
 }
 
+/* ─── Autofill override ─────────────────────────────── */
+/* Chrome/Edge imposent un background bleu sur les champs autofillés.
+   Le background ne peut pas être overridé directement, mais un box-shadow
+   inset de la bonne couleur le couvre complètement. */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #0a0f2d inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  caret-color: #ffffff;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 /* ─── Animations ────────────────────────────────────── */
 @keyframes fadeInUp {
   from {

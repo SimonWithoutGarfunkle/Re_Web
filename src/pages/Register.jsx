@@ -11,7 +11,10 @@ import CircularProgress from '@mui/material/CircularProgress';
 import InputAdornment from '@mui/material/InputAdornment';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import IconButton from '@mui/material/IconButton';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
@@ -99,6 +102,7 @@ export default function Register() {
   const [apiError, setApiError] = useState('');
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const validate = (vals) => {
     const e = {};
@@ -246,7 +250,7 @@ export default function Register() {
             <TextField
               fullWidth
               label="Mot de passe"
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               value={values.password}
               onChange={handleChange('password')}
               error={Boolean(errors.password)}
@@ -259,6 +263,13 @@ export default function Register() {
                       <LockOutlinedIcon sx={{ color: 'rgba(255,0,200,0.5)', fontSize: 20 }} />
                     </InputAdornment>
                   ),
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton onClick={() => setShowPassword((v) => !v)} edge="end" sx={{ color: 'rgba(255,255,255,0.4)' }}>
+                        {showPassword ? <VisibilityOff fontSize="small" /> : <Visibility fontSize="small" />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
                 },
               }}
               sx={{ mb: 0.5 }}
@@ -268,7 +279,7 @@ export default function Register() {
             <TextField
               fullWidth
               label="Confirmer le mot de passe"
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               value={values.confirmPassword}
               onChange={handleChange('confirmPassword')}
               error={Boolean(errors.confirmPassword)}
@@ -279,6 +290,13 @@ export default function Register() {
                   startAdornment: (
                     <InputAdornment position="start">
                       <LockOutlinedIcon sx={{ color: 'rgba(255,0,200,0.5)', fontSize: 20 }} />
+                    </InputAdornment>
+                  ),
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton onClick={() => setShowPassword((v) => !v)} edge="end" sx={{ color: 'rgba(255,255,255,0.4)' }}>
+                        {showPassword ? <VisibilityOff fontSize="small" /> : <Visibility fontSize="small" />}
+                      </IconButton>
                     </InputAdornment>
                   ),
                 },

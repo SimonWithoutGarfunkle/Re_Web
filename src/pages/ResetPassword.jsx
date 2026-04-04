@@ -253,6 +253,13 @@ export default function ResetPassword() {
                       <LockOutlinedIcon sx={{ color: 'rgba(176,38,255,0.55)', fontSize: 20 }} />
                     </InputAdornment>
                   ),
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton onClick={() => setShowPassword((v) => !v)} edge="end" sx={{ color: 'rgba(255,255,255,0.4)' }}>
+                        {showPassword ? <VisibilityOff fontSize="small" /> : <Visibility fontSize="small" />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
                 },
               }}
               sx={{ mb: 3.5 }}
