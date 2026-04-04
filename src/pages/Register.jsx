@@ -63,12 +63,6 @@ function PasswordRulesHint({ password }) {
   );
 }
 
-// Convertit "jj/mm/aaaa" en "aaaa-mm-jj" pour l'API
-function birthdayToISO(val) {
-  const [d, m, y] = val.split('/');
-  if (!d || !m || !y || y.length !== 4) return null;
-  return `${y}-${m.padStart(2, '0')}-${d.padStart(2, '0')}`;
-}
 
 const magentaButtonSx = {
   border: '1px solid rgba(255, 0, 200, 0.65)',
@@ -112,7 +106,6 @@ export default function Register() {
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(vals.email)) e.email = 'Email invalide';
     if (!vals.password) e.password = 'Mot de passe requis';
     else if (!PASSWORD_RULES.every((r) => r.test(vals.password))) e.password = 'Le mot de passe ne respecte pas les règles requises';
-    if (vals.birthday && !birthdayToISO(vals.birthday)) e.birthday = 'Format invalide (jj/mm/aaaa)';
     if (!vals.confirmPassword) e.confirmPassword = 'Confirmation requise';
     else if (vals.password && vals.confirmPassword !== vals.password) e.confirmPassword = 'Les mots de passe ne correspondent pas';
     return e;
@@ -138,7 +131,7 @@ export default function Register() {
       password: values.password,
       // confirmPassword n'est pas envoyé à l'API
     };
-    if (values.birthday) payload.birthday = birthdayToISO(values.birthday);
+    if (values.birthday) payload.birthday = values.birthday;
     if (values.telephone.trim()) payload.telephone = values.telephone.trim();
 
     setLoading(true);
@@ -320,8 +313,7 @@ export default function Register() {
             <TextField
               fullWidth
               label="Date de naissance"
-              type="text"
-              placeholder="jj/mm/aaaa"
+              type="date"
               value={values.birthday}
               onChange={handleChange('birthday')}
               error={Boolean(errors.birthday)}
@@ -335,6 +327,12 @@ export default function Register() {
                       <CalendarTodayOutlinedIcon sx={{ color: 'rgba(255,0,200,0.5)', fontSize: 20 }} />
                     </InputAdornment>
                   ),
+                  sx: {
+                    '& input::-webkit-calendar-picker-indicator': {
+                      filter: 'invert(1) opacity(0.5)',
+                      cursor: 'pointer',
+                    },
+                  },
                 },
               }}
               sx={{ mb: 2.5 }}
