@@ -27,7 +27,7 @@ export default function Home() {
   const location = useLocation();
 
   useEffect(() => {
-    const id = location.state?.scrollTo;
+    const id = location.state?.scrollTo || location.hash?.slice(1);
     if (!id) return;
     const el = document.getElementById(id);
     if (el) {
@@ -37,7 +37,7 @@ export default function Home() {
       const t = setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }), 100);
       return () => clearTimeout(t);
     }
-  }, [location.state]);
+  }, [location.state, location.hash]);
 
   return (
     <Box>
