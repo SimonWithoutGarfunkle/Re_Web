@@ -11,9 +11,52 @@ import IconButton from '@mui/material/IconButton';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { resetPassword } from '../api/auth';
+
+const PASSWORD_RULES = [
+  { label: '8 caractères minimum', test: (p) => p.length >= 8 },
+  { label: 'Une majuscule',        test: (p) => /[A-Z]/.test(p) },
+  { label: 'Une minuscule',        test: (p) => /[a-z]/.test(p) },
+  { label: 'Un chiffre',           test: (p) => /[0-9]/.test(p) },
+];
+
+function PasswordRulesHint({ password }) {
+  if (!password) return null;
+  return (
+    <Box sx={{ mt: 1, mb: 1, display: 'flex', flexWrap: 'wrap', gap: 0.75 }}>
+      {PASSWORD_RULES.map((rule) => {
+        const ok = rule.test(password);
+        return (
+          <Box
+            key={rule.label}
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 0.5,
+              px: 1,
+              py: 0.35,
+              borderRadius: '20px',
+              border: `1px solid ${ok ? 'rgba(0,200,100,0.4)' : 'rgba(255,255,255,0.12)'}`,
+              bgcolor: ok ? 'rgba(0,200,100,0.07)' : 'transparent',
+              transition: 'all 0.25s ease',
+            }}
+          >
+            {ok
+              ? <CheckCircleOutlineIcon sx={{ fontSize: 13, color: '#00c864' }} />
+              : <RadioButtonUncheckedIcon sx={{ fontSize: 13, color: 'rgba(255,255,255,0.25)' }} />
+            }
+            <Typography sx={{ fontSize: '0.72rem', color: ok ? '#00c864' : 'rgba(255,255,255,0.4)', transition: 'color 0.25s' }}>
+              {rule.label}
+            </Typography>
+          </Box>
+        );
+      })}
+    </Box>
+  );
+}
 
 const CARD_SX = {
   background: 'rgba(10, 15, 45, 0.65)',
@@ -39,7 +82,7 @@ export default function ResetPassword() {
 
   const validate = () => {
     const e = {};
-    if (password.length < 8) e.password = 'Le mot de passe doit contenir au moins 8 caractères';
+    if (!PASSWORD_RULES.every((r) => r.test(password))) e.password = 'Le mot de passe ne respecte pas les règles requises.';
     if (confirm !== password) e.confirm = 'Les mots de passe ne correspondent pas';
     return e;
   };
@@ -191,8 +234,9 @@ export default function ResetPassword() {
                   ),
                 },
               }}
-              sx={{ mb: 2.5 }}
+              sx={{ mb: 0 }}
             />
+            <PasswordRulesHint password={password} />
 
             <TextField
               fullWidth

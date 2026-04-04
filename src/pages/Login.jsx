@@ -9,9 +9,15 @@ import Link from '@mui/material/Link';
 import Alert from '@mui/material/Alert';
 import CircularProgress from '@mui/material/CircularProgress';
 import InputAdornment from '@mui/material/InputAdornment';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { login } from '../api/auth';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { login, requestPasswordReset } from '../api/auth';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -22,6 +28,12 @@ export default function Login() {
   const [apiError, setApiError] = useState('');
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const [forgotOpen, setForgotOpen] = useState(false);
+  const [forgotEmail, setForgotEmail] = useState('');
+  const [forgotLoading, setForgotLoading] = useState(false);
+  const [forgotFeedback, setForgotFeedback] = useState({ success: '', error: '' });
 
   const validate = (vals) => {
     const e = {};
@@ -36,6 +48,34 @@ export default function Login() {
     setValues(next);
     if (submitted) setErrors(validate(next));
     if (apiError) setApiError('');
+  };
+
+  const handleForgotOpen = () => {
+    setForgotEmail(values.email);
+    setForgotFeedback({ success: '', error: '' });
+    setForgotOpen(true);
+  };
+
+  const handleForgotSubmit = async (e) => {
+    e.preventDefault();
+    const val = forgotEmail.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+      setForgotFeedback({ success: '', error: 'Adresse email invalide.' });
+      return;
+    }
+    setForgotLoading(true);
+    setForgotFeedback({ success: '', error: '' });
+    try {
+      await requestPasswordReset(val);
+      setForgotFeedback({
+        success: 'Si un compte existe avec cette adresse email, un lien de réinitialisation a été envoyé.',
+        error: '',
+      });
+    } catch (err) {
+      setForgotFeedback({ success: '', error: err.message });
+    } finally {
+      setForgotLoading(false);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -143,7 +183,7 @@ export default function Login() {
             <TextField
               fullWidth
               label="Mot de passe"
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               value={values.password}
               onChange={handleChange('password')}
               error={Boolean(errors.password)}
@@ -156,10 +196,34 @@ export default function Login() {
                       <LockOutlinedIcon sx={{ color: 'rgba(0,229,255,0.5)', fontSize: 20 }} />
                     </InputAdornment>
                   ),
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton onClick={() => setShowPassword((v) => !v)} edge="end" sx={{ color: 'rgba(255,255,255,0.4)' }}>
+                        {showPassword ? <VisibilityOff fontSize="small" /> : <Visibility fontSize="small" />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
                 },
               }}
-              sx={{ mb: 3.5 }}
+              sx={{ mb: 1.5 }}
             />
+
+            <Box sx={{ textAlign: 'right', mb: 3 }}>
+              <Link
+                component="button"
+                type="button"
+                underline="none"
+                onClick={handleForgotOpen}
+                sx={{
+                  color: 'rgba(255,255,255,0.4)',
+                  fontSize: '0.82rem',
+                  transition: 'color 0.2s',
+                  '&:hover': { color: '#00e5ff' },
+                }}
+              >
+                Mot de passe oublié ?
+              </Link>
+            </Box>
 
             <Button
               type="submit"
@@ -192,6 +256,104 @@ export default function Login() {
           </Box>
         </Box>
       </Container>
+
+      {/* ── Modale mot de passe oublié ── */}
+      <Dialog
+        open={forgotOpen}
+        onClose={() => setForgotOpen(false)}
+        maxWidth="xs"
+        fullWidth
+        slotProps={{
+          paper: {
+            sx: {
+              background: 'rgba(10, 15, 45, 0.92)',
+              backdropFilter: 'blur(24px)',
+              WebkitBackdropFilter: 'blur(24px)',
+              border: '1px solid rgba(0, 229, 255, 0.2)',
+              borderRadius: '20px',
+              boxShadow: '0 0 40px rgba(0,229,255,0.08)',
+            },
+          },
+        }}
+      >
+        <DialogContent sx={{ px: { xs: 3, sm: 4 }, py: 4 }}>
+
+          {/* Header */}
+          <Box sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', mb: 2.5 }}>
+            <Box>
+              <Typography variant="h6" sx={{ fontWeight: 800, fontSize: '1.1rem' }}>
+                Mot de passe{' '}
+                <Box component="span" sx={{ color: '#00e5ff', textShadow: '0 0 14px rgba(0,229,255,0.6)' }}>
+                  oublié
+                </Box>
+              </Typography>
+              <Typography sx={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.82rem', mt: 0.5 }}>
+                On t'envoie un lien de réinitialisation.
+              </Typography>
+            </Box>
+            <IconButton
+              onClick={() => setForgotOpen(false)}
+              size="small"
+              sx={{ color: 'rgba(255,255,255,0.3)', mt: -0.5, mr: -1, '&:hover': { color: '#fff' } }}
+            >
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </Box>
+
+          {/* Formulaire */}
+          <Box component="form" onSubmit={handleForgotSubmit} noValidate>
+            <TextField
+              fullWidth
+              label="Adresse email"
+              type="email"
+              value={forgotEmail}
+              onChange={(e) => setForgotEmail(e.target.value)}
+              disabled={forgotLoading || Boolean(forgotFeedback.success)}
+              slotProps={{
+                input: {
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <EmailOutlinedIcon sx={{ color: 'rgba(0,229,255,0.5)', fontSize: 20 }} />
+                    </InputAdornment>
+                  ),
+                },
+              }}
+              sx={{ mb: 2 }}
+            />
+
+            {forgotFeedback.success && (
+              <Alert
+                severity="success"
+                sx={{ mb: 2, fontSize: '0.82rem', bgcolor: 'rgba(0,200,100,0.08)', color: '#5fffaa', border: '1px solid rgba(0,200,100,0.2)' }}
+              >
+                {forgotFeedback.success}
+              </Alert>
+            )}
+            {forgotFeedback.error && (
+              <Alert
+                severity="error"
+                sx={{ mb: 2, fontSize: '0.82rem', bgcolor: 'rgba(255,50,50,0.08)', color: '#ff8080', border: '1px solid rgba(255,50,50,0.2)' }}
+              >
+                {forgotFeedback.error}
+              </Alert>
+            )}
+
+            {!forgotFeedback.success && (
+              <Button
+                type="submit"
+                variant="outlined"
+                color="secondary"
+                fullWidth
+                disabled={forgotLoading}
+                sx={{ py: 1.2, fontSize: '0.9rem' }}
+              >
+                {forgotLoading ? <CircularProgress size={20} color="inherit" /> : 'ENVOYER LE LIEN'}
+              </Button>
+            )}
+          </Box>
+
+        </DialogContent>
+      </Dialog>
     </Box>
   );
 }

@@ -1,32 +1,27 @@
-const BASE_URL = 'https://re.simonwithoutgarfunkle.fr';
-
-function authHeaders(token) {
-  return { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` };
-}
+import { apiFetch } from './client';
 
 function handleError(err) {
   return new Error(err.detail || err.title || 'Une erreur est survenue, réessaie plus tard.');
 }
 
-export async function uploadAvatar(token, file) {
+export async function uploadAvatar(file) {
   const formData = new FormData();
   formData.append('file', file);
-  const res = await fetch(`${BASE_URL}/api/users/me/avatar`, {
+  const res = await apiFetch('/api/users/me/avatar', {
     method: 'POST',
-    headers: { Authorization: `Bearer ${token}` },
     body: formData,
   });
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
     throw handleError(err);
   }
-  return res.json(); // { url, key, ... }
+  return res.json();
 }
 
-export async function updateProfile(token, { email, username, telephone, birthday }) {
-  const res = await fetch(`${BASE_URL}/api/users/`, {
+export async function updateProfile({ email, username, telephone, birthday }) {
+  const res = await apiFetch('/api/users/', {
     method: 'PUT',
-    headers: authHeaders(token),
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       email,
       username,
@@ -42,23 +37,23 @@ export async function updateProfile(token, { email, username, telephone, birthda
   return res.json();
 }
 
-export async function updateUsername(token, username) {
-  const res = await fetch(`${BASE_URL}/api/users/username`, {
+export async function updateUsername(username) {
+  const res = await apiFetch('/api/users/username', {
     method: 'PATCH',
-    headers: authHeaders(token),
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username }),
   });
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
     throw handleError(err);
   }
-  return res.json(); // { username, email }
+  return res.json();
 }
 
-export async function updateEmail(token, email) {
-  const res = await fetch(`${BASE_URL}/api/users/email`, {
+export async function updateEmail(email) {
+  const res = await apiFetch('/api/users/email', {
     method: 'PATCH',
-    headers: authHeaders(token),
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email }),
   });
   if (!res.ok) {
@@ -68,10 +63,10 @@ export async function updateEmail(token, email) {
   return res.json();
 }
 
-export async function updatePassword(token, currentPassword, newPassword) {
-  const res = await fetch(`${BASE_URL}/api/users/password`, {
+export async function updatePassword(currentPassword, newPassword) {
+  const res = await apiFetch('/api/users/password', {
     method: 'PATCH',
-    headers: authHeaders(token),
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ currentPassword, newPassword }),
   });
   if (!res.ok) {

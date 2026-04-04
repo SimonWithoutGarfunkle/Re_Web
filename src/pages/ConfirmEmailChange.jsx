@@ -8,7 +8,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import MarkEmailReadIcon from '@mui/icons-material/MarkEmailRead';
-import { verifyEmail } from '../api/auth';
 
 const CARD_SX = {
   background: 'rgba(10, 15, 45, 0.65)',
@@ -30,33 +29,45 @@ export default function ConfirmEmailChange() {
 
   // TODO: quand le back envoie directement le token string, remplacer par :
   // const token = searchParams.get('token');
+  // et utiliser verifyEmail(token) dans le useEffect ci-dessous.
   //
-  // Workaround temporaire : le back envoie l'URL complète de l'API en tant que
-  // valeur du paramètre "token". On extrait le vrai token depuis cette URL.
+  // Workaround temporaire : le back envoie une Symfony signed URL complète
+  // (avec email, expires, id, signature, token) comme valeur du paramètre "token".
+  // On doit appeler cette URL en GET avec tous ses paramètres pour que la
+  // signature soit valide côté back.
   const rawToken = searchParams.get('token');
-  const token = (() => {
-    try {
-      const url = new URL(rawToken);
-      return url.searchParams.get('token') ?? rawToken;
-    } catch {
-      return rawToken;
-    }
-  })();
 
-  const [status, setStatus] = useState(token ? 'loading' : 'invalid'); // loading | success | expired | invalid | already
+  const [status, setStatus] = useState(rawToken ? 'loading' : 'invalid'); // loading | success | expired | invalid | already
 
   useEffect(() => {
-    if (!token) return;
+    if (!rawToken) return;
 
-    verifyEmail(token)
-      .then(() => setStatus('success'))
-      .catch((err) => {
-        const msg = (err.message || '').toLowerCase();
+    const call = (() => {
+      try {
+        // rawToken est une URL complète → GET direct vers le back (signed URL)
+        new URL(rawToken);
+        return fetch(rawToken, { method: 'GET' });
+      } catch {
+        // rawToken est un token string simple → POST classique
+        return fetch(`https://re.simonwithoutgarfunkle.fr/api/users/email/verify`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token: rawToken }),
+        });
+      }
+    })();
+
+    call
+      .then(async (res) => {
+        if (res.ok) { setStatus('success'); return; }
+        const err = await res.json().catch(() => ({}));
+        const msg = (err.detail || err.title || err.message || '').toLowerCase();
         if (msg.includes('déjà vérifié')) setStatus('already');
         else if (msg.includes('invalide') || msg.includes('expiré')) setStatus('expired');
         else setStatus('invalid');
-      });
-  }, [token]);
+      })
+      .catch(() => setStatus('invalid'));
+  }, [rawToken]);
 
   return (
     <Box sx={{ minHeight: 'calc(100vh - 64px)', display: 'flex', alignItems: 'center', py: 6 }}>

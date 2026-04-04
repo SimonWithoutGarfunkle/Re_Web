@@ -27,8 +27,6 @@ import { uploadAvatar, updateProfile, updateUsername, updateEmail, updatePasswor
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
-function getToken() { return localStorage.getItem('token') || ''; }
-
 function getUser() {
   try {
     const stored = localStorage.getItem('user');
@@ -192,7 +190,6 @@ export default function Profile() {
   if (!initialUser) { navigate('/login'); return null; }
 
   const displayName = user?.username || user?.email || 'utilisateur';
-  const token = getToken();
 
   // ── Handlers ──────────────────────────────────────────────────────────────
 
@@ -202,7 +199,7 @@ export default function Profile() {
     setAvatarLoading(true);
     setAvatarError('');
     try {
-      const res = await uploadAvatar(token, file);
+      const res = await uploadAvatar(file);
       const newUser = { ...user, avatar: res.url };
       setUser(newUser);
       patchLocalUser({ avatar: res.url });
@@ -219,7 +216,7 @@ export default function Profile() {
     setInfoLoading(true);
     setInfoFeedback({ success: '', error: '' });
     try {
-      const updated = await updateProfile(token, {
+      const updated = await updateProfile({
         email: user.email,
         username: user.username,
         telephone: info.telephone.trim() || null,
@@ -250,7 +247,7 @@ export default function Profile() {
     setUsernameLoading(true);
     setUsernameFeedback({ success: '', error: '' });
     try {
-      const res = await updateUsername(token, val);
+      const res = await updateUsername(val);
       setUser((u) => ({ ...u, username: res.username }));
       patchLocalUser({ username: res.username });
       setUsernameFeedback({ success: 'Nom d\'utilisateur mis à jour.', error: '' });
@@ -271,7 +268,7 @@ export default function Profile() {
     setEmailLoading(true);
     setEmailFeedback({ success: '', error: '' });
     try {
-      await updateEmail(token, val);
+      await updateEmail(val);
       setEmailFeedback({
         success: `Un lien de confirmation a été envoyé à ${val}. La modification sera effective après confirmation.`,
         error: '',
@@ -296,7 +293,7 @@ export default function Profile() {
     setPwdLoading(true);
     setPwdFeedback({ success: '', error: '' });
     try {
-      await updatePassword(token, pwd.current, pwd.newPwd);
+      await updatePassword(pwd.current, pwd.newPwd);
       // Déconnexion forcée après succès
       localStorage.removeItem('token');
       localStorage.removeItem('refresh_token');
