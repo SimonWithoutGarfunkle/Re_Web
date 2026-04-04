@@ -27,7 +27,21 @@ const CARD_SX = {
 
 export default function ConfirmEmailChange() {
   const [searchParams] = useSearchParams();
-  const token = searchParams.get('token');
+
+  // TODO: quand le back envoie directement le token string, remplacer par :
+  // const token = searchParams.get('token');
+  //
+  // Workaround temporaire : le back envoie l'URL complète de l'API en tant que
+  // valeur du paramètre "token". On extrait le vrai token depuis cette URL.
+  const rawToken = searchParams.get('token');
+  const token = (() => {
+    try {
+      const url = new URL(rawToken);
+      return url.searchParams.get('token') ?? rawToken;
+    } catch {
+      return rawToken;
+    }
+  })();
 
   const [status, setStatus] = useState(token ? 'loading' : 'invalid'); // loading | success | expired | invalid | already
 
