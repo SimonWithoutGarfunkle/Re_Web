@@ -182,7 +182,7 @@ export default function Register() {
             <Box
               component="img"
               src="/logo_re_detour.png"
-              alt="RE:"
+              alt="Re"
               sx={{ width: 56, height: 56, mb: 1.5, filter: 'drop-shadow(0 0 12px rgba(255,0,200,0.55))' }}
             />
             <Typography variant="h4" sx={{ fontWeight: 800, mb: 0.5 }}>
@@ -192,7 +192,7 @@ export default function Register() {
               le Cercle
             </Typography>
             <Typography sx={{ color: 'rgba(255,255,255,0.45)', fontSize: '0.88rem' }}>
-              Crée ton espace privé en quelques secondes
+              Crée ton compte et retrouve-nous sur l'app
             </Typography>
           </Box>
 

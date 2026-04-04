@@ -94,12 +94,12 @@ export default function PhoneMockup() {
               <Box
                 component="img"
                 src="/logo_re_detour.png"
-                alt="RE:"
+                alt="Re"
                 sx={{ width: 26, height: 26, filter: 'drop-shadow(0 0 4px rgba(0,229,255,0.5))' }}
               />
               <Box>
                 <Typography sx={{ fontSize: '0.62rem', color: '#00e5ff', fontWeight: 700, lineHeight: 1.2 }}>
-                  RE:
+                  Re
                 </Typography>
                 <Typography sx={{ fontSize: '0.55rem', color: 'rgba(255,255,255,0.45)', lineHeight: 1.2 }}>
                   Bienvenue, Thomas !

@@ -2,7 +2,8 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-import ObfuscatedEmail from '../components/ObfuscatedEmail';
+import MuiLink from '@mui/material/Link';
+import { Link as RouterLink } from 'react-router-dom';
 
 const SECTIONS = [
   {
@@ -46,8 +47,8 @@ const SECTIONS = [
     title: '5. Modération et signalement',
     content:
       "L'application est actuellement en cours de développement. Les outils de modération sont amenés à évoluer.",
-    footer: 'Toute demande de modération ou tout signalement de contenu peut être effectué par email : ',
-    email: true,
+    footer: 'Toute demande de modération ou tout signalement de contenu peut être effectué via notre ',
+    contactLink: true,
   },
 ];
 
@@ -137,7 +138,11 @@ export default function PolitiqueContenu() {
                     }}
                   >
                     {section.footer}
-                    {section.email && <ObfuscatedEmail />}
+                    {section.contactLink && (
+                      <MuiLink component={RouterLink} to="/contact?sujet=Demande de modération" sx={{ color: '#b026ff', textDecorationColor: '#b026ff' }}>
+                        formulaire de contact
+                      </MuiLink>
+                    )}
                   </Typography>
                 )}
                 {i < SECTIONS.length - 1 && (

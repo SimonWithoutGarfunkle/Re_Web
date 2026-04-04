@@ -93,7 +93,7 @@ export default function Login() {
             <Box
               component="img"
               src="/logo_re_detour.png"
-              alt="RE:"
+              alt="Re"
               sx={{ width: 56, height: 56, mb: 1.5, filter: 'drop-shadow(0 0 12px rgba(0,229,255,0.55))' }}
             />
             <Typography variant="h4" sx={{ fontWeight: 800, mb: 0.5 }}>

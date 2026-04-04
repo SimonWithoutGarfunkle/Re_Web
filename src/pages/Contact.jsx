@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
@@ -7,13 +8,28 @@ import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
 import CircularProgress from '@mui/material/CircularProgress';
 import InputAdornment from '@mui/material/InputAdornment';
-import Apple from '@mui/icons-material/Apple';
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import TitleOutlinedIcon from '@mui/icons-material/TitleOutlined';
+import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
 import { sendContact } from '../api/contact';
 
-export default function IosComingSoon() {
-  const [values, setValues] = useState({ name: '', email: '' });
+const INITIAL = { name: '', email: '', title: '', message: '' };
+
+function validate(vals) {
+  const e = {};
+  if (!vals.name.trim()) e.name = 'Nom requis';
+  if (!vals.email.trim()) e.email = 'Email requis';
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(vals.email)) e.email = 'Email invalide';
+  if (!vals.title.trim()) e.title = 'Sujet requis';
+  if (!vals.message.trim()) e.message = 'Message requis';
+  return e;
+}
+
+export default function Contact() {
+  const [searchParams] = useSearchParams();
+  const [values, setValues] = useState({ ...INITIAL, title: searchParams.get('sujet') ?? '' });
+  const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [serverError, setServerError] = useState('');
@@ -23,17 +39,20 @@ export default function IosComingSoon() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const errs = validate(values);
+    if (Object.keys(errs).length) { setErrors(errs); return; }
+    setErrors({});
     setLoading(true);
     setServerError('');
     try {
       await sendContact({
         name: values.name.trim(),
         email: values.email.trim(),
-        title: 'Notification iOS',
-        message: "Inscrit pour être notifié de la sortie de l'application iOS.",
+        title: values.title.trim(),
+        message: values.message.trim(),
       });
       setSuccess(true);
-      setValues({ name: '', email: '' });
+      setValues(INITIAL);
     } catch (err) {
       setServerError(err.message);
     } finally {
@@ -42,14 +61,7 @@ export default function IosComingSoon() {
   };
 
   return (
-    <Box
-      sx={{
-        minHeight: 'calc(100vh - 64px)',
-        display: 'flex',
-        alignItems: 'center',
-        py: 6,
-      }}
-    >
+    <Box sx={{ minHeight: 'calc(100vh - 64px)', display: 'flex', alignItems: 'center', py: 6 }}>
       <Container maxWidth="sm">
         <Box
           sx={{
@@ -76,69 +88,24 @@ export default function IosComingSoon() {
             },
           }}
         >
-          {/* Icône + badge */}
           <Box sx={{ textAlign: 'center', mb: 4 }}>
-            <Box
-              sx={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: 72,
-                height: 72,
-                borderRadius: '20px',
-                background: 'rgba(176, 38, 255, 0.1)',
-                border: '1px solid rgba(176, 38, 255, 0.3)',
-                mb: 2,
-                filter: 'drop-shadow(0 0 18px rgba(176,38,255,0.35))',
-              }}
-            >
-              <Apple sx={{ fontSize: 38, color: 'rgba(255,255,255,0.85)' }} />
-            </Box>
-
-            <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
-              <Box
-                sx={{
-                  px: 1.5,
-                  py: 0.3,
-                  borderRadius: '20px',
-                  background: 'rgba(176, 38, 255, 0.15)',
-                  border: '1px solid rgba(176, 38, 255, 0.3)',
-                }}
-              >
-                <Typography sx={{ fontSize: '0.72rem', color: '#b026ff', fontWeight: 700, letterSpacing: '0.1em' }}>
-                  BIENTÔT DISPONIBLE
-                </Typography>
-              </Box>
-            </Box>
-
-            <Typography variant="h4" sx={{ fontWeight: 800, mb: 1.5, lineHeight: 1.2 }}>
-              Re arrive sur{' '}
+            <Typography variant="h4" sx={{ fontWeight: 800, mb: 1, lineHeight: 1.2 }}>
+              Nous{' '}
               <Box component="span" sx={{ color: '#b026ff', textShadow: '0 0 20px rgba(176,38,255,0.6)' }}>
-                iPhone
+                contacter
               </Box>
             </Typography>
-
-            <Typography
-              sx={{
-                color: 'rgba(255,255,255,0.5)',
-                fontSize: '0.95rem',
-                lineHeight: 1.7,
-                maxWidth: 380,
-                mx: 'auto',
-              }}
-            >
-              L'application iOS prend un peu plus de temps mais elle arrive.
-              Laisse-nous tes coordonnées, on te prévient dès que c'est dispo.
+            <Typography sx={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.95rem' }}>
+              Une question, une suggestion ? On te répond.
             </Typography>
           </Box>
 
-          {/* Feedback */}
           {success && (
             <Alert
               severity="success"
               sx={{ mb: 3, bgcolor: 'rgba(0,200,100,0.08)', color: '#5fffaa', border: '1px solid rgba(0,200,100,0.2)' }}
             >
-              Inscription confirmée ! On te préviendra dès que l'app iOS est disponible.
+              Message envoyé ! On te répondra dès que possible.
             </Alert>
           )}
           {serverError && (
@@ -150,14 +117,14 @@ export default function IosComingSoon() {
             </Alert>
           )}
 
-          {/* Formulaire */}
           <Box component="form" onSubmit={handleSubmit} noValidate>
             <TextField
               fullWidth
-              label="Ton prénom"
-              type="text"
+              label="Nom"
               value={values.name}
               onChange={handleChange('name')}
+              error={Boolean(errors.name)}
+              helperText={errors.name}
               slotProps={{
                 input: {
                   startAdornment: (
@@ -175,11 +142,51 @@ export default function IosComingSoon() {
               type="email"
               value={values.email}
               onChange={handleChange('email')}
+              error={Boolean(errors.email)}
+              helperText={errors.email}
               slotProps={{
                 input: {
                   startAdornment: (
                     <InputAdornment position="start">
                       <EmailOutlinedIcon sx={{ color: 'rgba(176,38,255,0.55)', fontSize: 20 }} />
+                    </InputAdornment>
+                  ),
+                },
+              }}
+              sx={{ mb: 2.5 }}
+            />
+            <TextField
+              fullWidth
+              label="Sujet"
+              value={values.title}
+              onChange={handleChange('title')}
+              error={Boolean(errors.title)}
+              helperText={errors.title}
+              slotProps={{
+                input: {
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <TitleOutlinedIcon sx={{ color: 'rgba(176,38,255,0.55)', fontSize: 20 }} />
+                    </InputAdornment>
+                  ),
+                },
+              }}
+              sx={{ mb: 2.5 }}
+            />
+            <TextField
+              fullWidth
+              label="Message"
+              multiline
+              rows={5}
+              value={values.message}
+              onChange={handleChange('message')}
+              error={Boolean(errors.message)}
+              helperText={errors.message}
+              slotProps={{
+                input: {
+                  startAdornment: (
+                    <InputAdornment position="start" sx={{ alignSelf: 'flex-start', mt: 1.5 }}>
+                      <MessageOutlinedIcon sx={{ color: 'rgba(176,38,255,0.55)', fontSize: 20 }} />
                     </InputAdornment>
                   ),
                 },
@@ -192,7 +199,7 @@ export default function IosComingSoon() {
               variant="outlined"
               size="large"
               fullWidth
-              disabled={loading || success}
+              disabled={loading}
               sx={{
                 border: '1px solid rgba(176, 38, 255, 0.65)',
                 color: '#b026ff',
@@ -210,7 +217,7 @@ export default function IosComingSoon() {
                 },
               }}
             >
-              {loading ? <CircularProgress size={22} sx={{ color: '#b026ff' }} /> : 'ME PRÉVENIR'}
+              {loading ? <CircularProgress size={22} sx={{ color: '#b026ff' }} /> : 'ENVOYER'}
             </Button>
           </Box>
         </Box>

@@ -70,7 +70,7 @@ export default function Navbar() {
             <Box
               component="img"
               src="/logo_re_detour.png"
-              alt="RE: logo"
+              alt="Re logo"
               sx={{
                 height: 60,
                 width: 60,
