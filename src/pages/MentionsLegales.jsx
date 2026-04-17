@@ -15,7 +15,7 @@ const SECTIONS = [
       'France',
     ],
     contactLink: true,
-    footer: 'Responsable de la publication : Simon Lefort',
+    footer: 'Responsable de la publication : Simon Lefort  ',
   },
   {
     title: '2. Hébergement',
