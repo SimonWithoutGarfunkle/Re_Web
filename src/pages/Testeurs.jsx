@@ -51,7 +51,7 @@ const sections = [
           avec le compte Google que tu nous as donné.
         </Box>
         <Box component="span" sx={{ display: 'block', mb: 1 }}>
-          2. Appuie sur Devenir testeur/Become a tester. Si tu vois "You are a tester" c'est validé!
+          2. Appuie sur « Devenir testeur » / « Become a tester ». Si « You are a tester » s'affiche, c'est bon !
 
         </Box>
         <Box component="span" sx={{ display: 'block' }}>
@@ -78,7 +78,7 @@ const sections = [
   {
     icon: FlashOnOutlinedIcon,
     title: 'Testeur pressé ?',
-    text: "Installe l'application et lance la. Même sans aller plus loin, c'est déjà très utile❤️",
+    text: "Installe l'application et lance-la. Même sans aller plus loin, c'est déjà très utile ❤️",
   },
   {
     icon: BugReportOutlinedIcon,
@@ -152,8 +152,7 @@ export default function Testeurs() {
               textShadow: '0 1px 12px rgba(0,0,0,0.95)',
             }}
           >
-            Tu fais partie des premiers à essayer notre application RE.
-            Merci de nous donner un coup de main : ça aide beaucoup à faire avancer le projet ❤️
+              Tu fais partie des premiers à tester RE. Merci de nous aider à faire avancer le projet ❤️
           </Typography>
 
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} sx={{ mt: 4 }}>
