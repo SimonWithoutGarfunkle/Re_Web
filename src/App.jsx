@@ -9,6 +9,7 @@ import Confidentialite from './pages/Confidentialite';
 import PolitiqueContenu from './pages/PolitiqueContenu';
 import Profile from './pages/Profile';
 import Contact from './pages/Contact';
+import Testeurs from './pages/Testeurs';
 import VerifyEmail from './pages/VerifyEmail';
 import ConfirmEmailChange from './pages/ConfirmEmailChange';
 import ResetPassword from './pages/ResetPassword';
@@ -31,6 +32,7 @@ export default function App() {
           <Route path="/politique-contenu" element={<PolitiqueContenu />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/testeurs" element={<Testeurs />} />
           <Route path="/verify-email" element={<VerifyEmail />} />
           <Route path="/confirm-email-change" element={<ConfirmEmailChange />} />
           <Route path="/reset-password" element={<ResetPassword />} />

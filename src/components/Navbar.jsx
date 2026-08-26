@@ -21,6 +21,7 @@ const NAV_LINKS = [
   { label: "L'Appli", id: 'appli' },
   { label: 'Le Projet', id: 'projet' },
   { label: 'Les Développeurs', id: 'developpeurs' },
+  { label: 'Testeurs', path: '/testeurs' },
 ];
 
 
@@ -49,6 +50,7 @@ export default function Navbar() {
   const location = useLocation();
 
   const handleNavClick = (id) => {
+    if (!id) return;
     if (location.pathname === '/') {
       document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     } else {
@@ -96,6 +98,8 @@ export default function Navbar() {
               {NAV_LINKS.map((link) => (
                 <Button
                   key={link.label}
+                  component={link.path ? RouterLink : 'button'}
+                  to={link.path}
                   onClick={() => handleNavClick(link.id)}
                   sx={{
                     color: 'rgba(255,255,255,0.75)',
@@ -194,6 +198,8 @@ export default function Navbar() {
           {NAV_LINKS.map((link) => (
             <ListItem key={link.label} disablePadding>
               <ListItemButton
+                component={link.path ? RouterLink : 'button'}
+                to={link.path}
                 onClick={() => { handleNavClick(link.id); setDrawerOpen(false); }}
                 sx={{ py: 1.5, px: 3, '&:hover': { bgcolor: 'rgba(176, 38, 255, 0.08)' } }}
               >
