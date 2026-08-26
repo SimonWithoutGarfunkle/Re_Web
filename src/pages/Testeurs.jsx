@@ -152,8 +152,8 @@ export default function Testeurs() {
               textShadow: '0 1px 12px rgba(0,0,0,0.95)',
             }}
           >
-            Tu fais partie des premiers à essayer RE sur Android.
-            Merci de nous donner un coup de main : ça aide beaucoup à faire avancer le projet !
+            Tu fais partie des premiers à essayer notre application RE.
+            Merci de nous donner un coup de main : ça aide beaucoup à faire avancer le projet ❤️
           </Typography>
 
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} sx={{ mt: 4 }}>
