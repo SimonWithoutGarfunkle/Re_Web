@@ -14,12 +14,18 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import FlashOnOutlinedIcon from '@mui/icons-material/FlashOnOutlined';
 import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
 import InstallMobileOutlinedIcon from '@mui/icons-material/InstallMobileOutlined';
+import TipsAndUpdatesOutlinedIcon from '@mui/icons-material/TipsAndUpdatesOutlined';
 
 const sections = [
   {
     icon: FavoriteBorderOutlinedIcon,
     title: "Pourquoi RE ?",
-    text: "RE sert à retrouver les recommandations qui comptent vraiment : celles de tes proches. Films, séries, livres... tout part de goûts réels, pas d'un algo.",
+    text: "RE permet de partager les œuvres qui nous ont vraiment marqués. Films, séries, livres... on garde une trace de ce qu'on aime, et on découvre les goûts de ses proches. Pas d'algo, pas de bruit. Juste des recommandations qui comptent vraiment.",
+  },
+  {
+    icon: TipsAndUpdatesOutlinedIcon,
+    title: 'Encore en construction',
+    text: "RE est encore en cours de développement. L'app va évoluer, certaines choses peuvent changer, et il peut rester des bugs. Si une fonctionnalité te manque ou si tu as une idée, dis-le-nous : c'est le bon moment pour proposer.",
   },
   {
     icon: InstallMobileOutlinedIcon,
