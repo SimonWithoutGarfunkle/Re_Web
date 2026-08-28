@@ -477,7 +477,7 @@ export default function Profile() {
             <Box component="form" onSubmit={handleUsernameSave} sx={{ display: 'flex', flexDirection: 'column' }}>
               <TextField
                 fullWidth
-                label="Nom d'utilisateur"
+                label="Pseudo"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 slotProps={{

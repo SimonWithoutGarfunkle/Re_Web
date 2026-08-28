@@ -203,7 +203,7 @@ export default function Register() {
             {/* ── Champs obligatoires ── */}
             <TextField
               fullWidth
-              label="Nom d'utilisateur"
+              label="Pseudo"
               value={values.username}
               onChange={handleChange('username')}
               error={Boolean(errors.username)}
