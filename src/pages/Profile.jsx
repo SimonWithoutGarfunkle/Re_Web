@@ -13,8 +13,6 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Tooltip from '@mui/material/Tooltip';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
-import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
-import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
 import Visibility from '@mui/icons-material/Visibility';
@@ -23,7 +21,7 @@ import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
-import { uploadAvatar, updateProfile, updateUsername, updateEmail, updatePassword } from '../api/user';
+import { uploadAvatar, updateUsername, updateEmail, updatePassword } from '../api/user';
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
@@ -39,12 +37,6 @@ function patchLocalUser(patch) {
     const u = getUser() || {};
     localStorage.setItem('user', JSON.stringify({ ...u, ...patch }));
   } catch { /* noop */ }
-}
-
-// Normalise une date stockée en "YYYY-MM-DD" pour <input type="date">
-function toDateInput(val) {
-  if (!val) return '';
-  return val.slice(0, 10); // "YYYY-MM-DD"
 }
 
 const USERNAME_RE = /^[A-Za-z0-9._-]+$/;
@@ -163,14 +155,6 @@ export default function Profile() {
   const [avatarLoading, setAvatarLoading] = useState(false);
   const [avatarError, setAvatarError] = useState('');
 
-  // Infos (téléphone + birthday)
-  const [info, setInfo] = useState({
-    telephone: initialUser?.telephone || '',
-    birthday: toDateInput(initialUser?.birthday),
-  });
-  const [infoLoading, setInfoLoading] = useState(false);
-  const [infoFeedback, setInfoFeedback] = useState({ success: '', error: '' });
-
   // Username
   const [username, setUsername] = useState(initialUser?.username || '');
   const [usernameLoading, setUsernameLoading] = useState(false);
@@ -208,28 +192,6 @@ export default function Profile() {
     } finally {
       setAvatarLoading(false);
       e.target.value = '';
-    }
-  };
-
-  const handleInfoSave = async (e) => {
-    e.preventDefault();
-    setInfoLoading(true);
-    setInfoFeedback({ success: '', error: '' });
-    try {
-      const updated = await updateProfile({
-        email: user.email,
-        username: user.username,
-        telephone: info.telephone.trim() || null,
-        birthday: info.birthday || null,
-      });
-      const patch = { telephone: updated.telephone, birthday: updated.birthday };
-      setUser((u) => ({ ...u, ...patch }));
-      patchLocalUser(patch);
-      setInfoFeedback({ success: 'Informations mises à jour.', error: '' });
-    } catch (err) {
-      setInfoFeedback({ success: '', error: err.message });
-    } finally {
-      setInfoLoading(false);
     }
   };
 
@@ -420,54 +382,6 @@ export default function Profile() {
           </Box>
 
           <Divider sx={{ borderColor: 'rgba(176,38,255,0.12)', mb: 3.5 }} />
-
-          {/* ── Informations personnelles ── */}
-          <SectionTitle>Informations personnelles</SectionTitle>
-          <Box component="form" onSubmit={handleInfoSave} sx={{ display: 'flex', flexDirection: 'column', gap: 2.5 }}>
-            <TextField
-              fullWidth
-              label="Téléphone"
-              type="tel"
-              value={info.telephone}
-              onChange={(e) => setInfo((s) => ({ ...s, telephone: e.target.value }))}
-              slotProps={{
-                input: {
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <PhoneOutlinedIcon sx={{ color: 'rgba(176,38,255,0.5)', fontSize: 20 }} />
-                    </InputAdornment>
-                  ),
-                },
-              }}
-            />
-            <TextField
-              fullWidth
-              label="Date de naissance"
-              type="date"
-              value={info.birthday}
-              onChange={(e) => setInfo((s) => ({ ...s, birthday: e.target.value }))}
-              slotProps={{
-                inputLabel: { shrink: true },
-                input: {
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <CalendarTodayOutlinedIcon sx={{ color: 'rgba(176,38,255,0.5)', fontSize: 20 }} />
-                    </InputAdornment>
-                  ),
-                  sx: {
-                    '& input::-webkit-calendar-picker-indicator': {
-                      filter: 'invert(1) opacity(0.5)',
-                      cursor: 'pointer',
-                    },
-                  },
-                },
-              }}
-            />
-            <Feedback {...infoFeedback} />
-            <SaveButton loading={infoLoading} />
-          </Box>
-
-          <Divider sx={{ borderColor: 'rgba(176,38,255,0.12)', my: 3.5 }} />
 
           {/* ── Sécurité ── */}
           <SectionTitle>Sécurité</SectionTitle>

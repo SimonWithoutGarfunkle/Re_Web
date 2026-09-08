@@ -40,7 +40,6 @@ Bien que ce site ne soit pas l'application, les utilisateurs inscrits peuvent g�
 - 👤 Modifier son **nom d'utilisateur**
 - 📧 Changer son **adresse email** *(avec confirmation par lien)*
 - 🔒 Mettre à jour son **mot de passe**
-- 📞 Renseigner son **numéro de téléphone** et sa **date de naissance**
 - 📩 Contacter l'**équipe** via le formulaire de contact
 
 ---

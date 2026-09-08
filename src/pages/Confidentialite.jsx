@@ -18,8 +18,6 @@ const SECTIONS = [
       'Adresse email',
       'Nom d\'utilisateur',
       'Avatar (optionnel)',
-      'Téléphone (optionnel)',
-      'Date de naissance (optionnel)',
       'Liste d\'amis (optionnel)',
       'Recommandations et historique d\'utilisation (optionnel)',
     ],
