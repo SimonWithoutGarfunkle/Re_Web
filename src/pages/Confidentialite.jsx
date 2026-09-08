@@ -63,7 +63,7 @@ export default function Confidentialite() {
               </Box>
             </Typography>
             <Typography sx={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.85rem' }}>
-              Dernière mise à jour : avril 2026
+              Dernière mise à jour : septembre 2026
             </Typography>
             <Box
               sx={{
