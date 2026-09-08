@@ -15,8 +15,6 @@ import IconButton from '@mui/material/IconButton';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
-import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import { signup } from '../api/auth';
@@ -89,8 +87,6 @@ export default function Register() {
     email: '',
     password: '',
     confirmPassword: '',
-    birthday: '',
-    telephone: '',
   });
   const [errors, setErrors] = useState({});
   const [apiError, setApiError] = useState('');
@@ -131,8 +127,6 @@ export default function Register() {
       password: values.password,
       // confirmPassword n'est pas envoyé à l'API
     };
-    if (values.birthday) payload.birthday = values.birthday;
-    if (values.telephone.trim()) payload.telephone = values.telephone.trim();
 
     setLoading(true);
     setApiError('');
@@ -295,65 +289,6 @@ export default function Register() {
                 },
               }}
               sx={{ mb: 3 }}
-            />
-
-            {/* ── Champs optionnels ── */}
-            <Typography
-              sx={{
-                fontSize: '0.75rem',
-                color: 'rgba(255,255,255,0.35)',
-                textTransform: 'uppercase',
-                letterSpacing: '0.1em',
-                mb: 2,
-              }}
-            >
-              Optionnel
-            </Typography>
-
-            <TextField
-              fullWidth
-              label="Date de naissance"
-              type="date"
-              value={values.birthday}
-              onChange={handleChange('birthday')}
-              error={Boolean(errors.birthday)}
-              helperText={errors.birthday}
-              disabled={loading}
-              slotProps={{
-                inputLabel: { shrink: true },
-                input: {
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <CalendarTodayOutlinedIcon sx={{ color: 'rgba(255,0,200,0.5)', fontSize: 20 }} />
-                    </InputAdornment>
-                  ),
-                  sx: {
-                    '& input::-webkit-calendar-picker-indicator': {
-                      filter: 'invert(1) opacity(0.5)',
-                      cursor: 'pointer',
-                    },
-                  },
-                },
-              }}
-              sx={{ mb: 2.5 }}
-            />
-            <TextField
-              fullWidth
-              label="Téléphone"
-              type="tel"
-              value={values.telephone}
-              onChange={handleChange('telephone')}
-              disabled={loading}
-              slotProps={{
-                input: {
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <PhoneOutlinedIcon sx={{ color: 'rgba(255,0,200,0.5)', fontSize: 20 }} />
-                    </InputAdornment>
-                  ),
-                },
-              }}
-              sx={{ mb: 3.5 }}
             />
 
             <Button

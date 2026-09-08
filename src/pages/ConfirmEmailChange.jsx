@@ -8,6 +8,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import MarkEmailReadIcon from '@mui/icons-material/MarkEmailRead';
+import { API_BASE_URL } from '../api/config';
 
 const CARD_SX = {
   background: 'rgba(10, 15, 45, 0.65)',
@@ -49,7 +50,7 @@ export default function ConfirmEmailChange() {
         return fetch(rawToken, { method: 'GET' });
       } catch {
         // rawToken est un token string simple → POST classique
-        return fetch(`https://re.simonwithoutgarfunkle.fr/api/users/email/verify`, {
+        return fetch(`${API_BASE_URL}/api/users/email/verify`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ token: rawToken }),

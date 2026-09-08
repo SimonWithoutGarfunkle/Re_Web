@@ -18,25 +18,6 @@ export async function uploadAvatar(file) {
   return res.json();
 }
 
-export async function updateProfile({ email, username, telephone, birthday }) {
-  const res = await apiFetch('/api/users/', {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      email,
-      username,
-      telephone: telephone || null,
-      description: null,
-      birthday: birthday || null,
-    }),
-  });
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    throw handleError(err);
-  }
-  return res.json();
-}
-
 export async function updateUsername(username) {
   const res = await apiFetch('/api/users/username', {
     method: 'PATCH',
