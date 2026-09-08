@@ -1,10 +1,10 @@
-const BASE_URL = 'https://re.simonwithoutgarfunkle.fr';
+import { API_BASE_URL } from './config';
 
 /**
  * @param {{ name: string, email: string, title: string, message: string }} payload
  */
 export async function sendContact(payload) {
-  const res = await fetch(`${BASE_URL}/api/contact`, {
+  const res = await fetch(`${API_BASE_URL}/api/contact`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),

@@ -1,4 +1,4 @@
-const BASE_URL = 'https://re.simonwithoutgarfunkle.fr';
+import { API_BASE_URL } from './config';
 
 function isExpired(token) {
   try {
@@ -19,7 +19,7 @@ function forceLogout() {
 async function doRefresh() {
   const refreshToken = localStorage.getItem('refresh_token');
   if (!refreshToken) throw new Error('no refresh token');
-  const res = await fetch(`${BASE_URL}/api/auth/token/refresh`, {
+  const res = await fetch(`${API_BASE_URL}/api/auth/token/refresh`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ refresh_token: refreshToken }),
@@ -47,7 +47,7 @@ export async function apiFetch(path, options = {}) {
   }
 
   const authHeader = token ? { Authorization: `Bearer ${token}` } : {};
-  const res = await fetch(`${BASE_URL}${path}`, {
+  const res = await fetch(`${API_BASE_URL}${path}`, {
     ...options,
     headers: { ...options.headers, ...authHeader },
   });
@@ -56,7 +56,7 @@ export async function apiFetch(path, options = {}) {
   if (res.status === 401) {
     try {
       token = await doRefresh();
-      return fetch(`${BASE_URL}${path}`, {
+      return fetch(`${API_BASE_URL}${path}`, {
         ...options,
         headers: { ...options.headers, Authorization: `Bearer ${token}` },
       });

@@ -1,4 +1,4 @@
-const BASE_URL = 'https://re.simonwithoutgarfunkle.fr';
+import { API_BASE_URL } from './config';
 
 // Messages exacts retournés par LexikJWTAuthenticationBundle (Symfony)
 const MESSAGES_FR = {
@@ -28,7 +28,7 @@ function translateError(message) {
 }
 
 export async function login(email, password) {
-  const res = await fetch(`${BASE_URL}/api/auth/login`, {
+  const res = await fetch(`${API_BASE_URL}/api/auth/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password }),
@@ -43,7 +43,7 @@ export async function login(email, password) {
 }
 
 export async function verifyEmail(token) {
-  const res = await fetch(`${BASE_URL}/api/users/email/verify`, {
+  const res = await fetch(`${API_BASE_URL}/api/users/email/verify`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ token }),
@@ -56,7 +56,7 @@ export async function verifyEmail(token) {
 }
 
 export async function resendVerification(email) {
-  await fetch(`${BASE_URL}/api/users/email/resend-verification`, {
+  await fetch(`${API_BASE_URL}/api/users/email/resend-verification`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email }),
@@ -65,7 +65,7 @@ export async function resendVerification(email) {
 }
 
 export async function requestPasswordReset(email) {
-  const res = await fetch(`${BASE_URL}/api/reset-password/request`, {
+  const res = await fetch(`${API_BASE_URL}/api/reset-password/request`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email }),
@@ -79,7 +79,7 @@ export async function requestPasswordReset(email) {
 }
 
 export async function resetPassword(token, password) {
-  const res = await fetch(`${BASE_URL}/api/reset-password/reset`, {
+  const res = await fetch(`${API_BASE_URL}/api/reset-password/reset`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ token, password }),
@@ -92,7 +92,7 @@ export async function resetPassword(token, password) {
 }
 
 export async function signup(payload) {
-  const res = await fetch(`${BASE_URL}/api/auth/register`, {
+  const res = await fetch(`${API_BASE_URL}/api/auth/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
