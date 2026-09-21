@@ -62,5 +62,3 @@ RE est actuellement en développement. La version iOS est en chemin. 🚀
 ---
 
 *Ce site vitrine est développé avec React + Vite.*
-
-Configuration Google Analytics, recette et points juridiques à compléter avant publication : [guide Analytics et juridique](docs/analytics-et-juridique.md).
