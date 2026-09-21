@@ -18,6 +18,8 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import { signup } from '../api/auth';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 const PASSWORD_RULES = [
   { label: '8 caractères minimum',  test: (p) => p.length >= 8 },
@@ -93,6 +95,7 @@ export default function Register() {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
 
   const validate = (vals) => {
     const e = {};
@@ -120,6 +123,7 @@ export default function Register() {
     const errs = validate(values);
     setErrors(errs);
     if (Object.keys(errs).length > 0) return;
+    if (!acceptedTerms) return;
 
     const payload = {
       username: values.username.trim(),
@@ -291,6 +295,15 @@ export default function Register() {
               sx={{ mb: 3 }}
             />
 
+            <FormControlLabel
+              sx={{ alignItems: 'flex-start', mb: 1 }}
+              control={<Checkbox checked={acceptedTerms} onChange={(event) => setAcceptedTerms(event.target.checked)} disabled={loading} required />}
+              label={<Typography variant="body2" sx={{ pt: 1 }}>J’accepte les <Link component={RouterLink} to="/conditions-utilisation" target="_blank" rel="noopener" color="secondary">conditions générales d’utilisation</Link>.</Typography>}
+            />
+            {submitted && !acceptedTerms && <Typography role="alert" color="error" variant="body2" sx={{ mb: 1 }}>Veuillez accepter les CGU pour créer votre compte.</Typography>}
+            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+              Pour en savoir plus sur vos données, consultez la <Link component={RouterLink} to="/confidentialite" target="_blank" rel="noopener" color="secondary">politique de confidentialité</Link>. La mesure d’audience reste facultative.
+            </Typography>
             <Button
               type="submit"
               variant="outlined"
