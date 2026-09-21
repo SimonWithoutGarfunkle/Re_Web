@@ -2,6 +2,16 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 
 let instance = 0;
+function assertWithdrawn(api) {
+  assert.equal(window[`ga-disable-${api.MEASUREMENT_ID}`], true);
+  assert.equal(window.dataLayer.some((args) => args[0] === 'event'), false);
+  const updates = window.dataLayer.filter((args) => args[0] === 'consent' && args[1] === 'update');
+  assert.equal(updates.length, 1);
+  assert.deepEqual(updates[0][2], {
+    analytics_storage: 'denied', ad_storage: 'denied',
+    ad_user_data: 'denied', ad_personalization: 'denied',
+  });
+}
 async function setup({ blocked = false } = {}) {
   const storage = new Map();
   const scripts = [];
@@ -65,9 +75,8 @@ test('withdrawal clears queued events, disables Google and removes only Analytic
   env.api.trackPage('/');
   env.api.saveConsent(false);
   assert.equal(env.api.readConsent(), false);
-  assert.equal(window.dataLayer.length, 0);
-  assert.equal(window[`ga-disable-${env.api.MEASUREMENT_ID}`], true);
-  assert.equal(env.reloads(), 1);
+  assertWithdrawn(env.api);
+  assert.equal(env.reloads(), 0);
   assert.ok(env.cookies.some((cookie) => cookie.includes('domain=re.example')));
   assert.ok(env.cookies.every((cookie) => cookie.startsWith('_ga')));
 });
@@ -100,7 +109,8 @@ test('another tab withdrawing consent stops an already loaded tag', async () => 
   storage.set(api.CONSENT_KEY, JSON.stringify({ version: 1, analytics: false, expiresAt: Date.now() + 10000 }));
   handlers.storage({ key: api.CONSENT_KEY });
   assert.equal(api.readConsent(), false);
-  assert.equal(reloads(), 1);
+  assertWithdrawn(api);
+  assert.equal(reloads(), 0);
   stop();
 });
 
@@ -114,7 +124,8 @@ test('consent expiring in an open tab disables tracking', async () => {
     Date.now = () => now() + 366 * 24 * 60 * 60 * 1000;
     handlers.timer();
     assert.equal(api.readConsent(), null);
-    assert.equal(reloads(), 1);
+    assertWithdrawn(api);
+    assert.equal(reloads(), 0);
     assert.equal(window[`ga-disable-${api.MEASUREMENT_ID}`], true);
   } finally { Date.now = now; stop(); }
 });
@@ -126,4 +137,32 @@ test('withdrawal with full storage removes the older saved agreement', async () 
   api.saveConsent(false);
   assert.equal(api.readConsent(), false);
   assert.equal(storage.has(api.CONSENT_KEY), false);
+});
+
+test('repeated consent checks preserve the withdrawal while the script loads', async () => {
+  const { api, handlers } = await setup();
+  api.saveConsent(true);
+  api.trackPage('/');
+  const stop = api.watchConsent();
+  api.saveConsent(false);
+  handlers.timer();
+  handlers.focus();
+  api.trackPage('/ios');
+  assertWithdrawn(api);
+  assert.ok(window.dataLayer.some((args) => args[0] === 'config'));
+  stop();
+});
+
+test('reacceptance updates consent before tracking without loading a second script', async () => {
+  const { api, scripts } = await setup();
+  api.saveConsent(true);
+  api.trackPage('/');
+  api.saveConsent(false);
+  api.saveConsent(true);
+  api.trackPage('/');
+  assert.equal(scripts.length, 1);
+  assert.equal(window[`ga-disable-${api.MEASUREMENT_ID}`], false);
+  const grantIndex = window.dataLayer.findIndex((args) => args[0] === 'consent' && args[2].analytics_storage === 'granted');
+  const eventIndex = window.dataLayer.findIndex((args) => args[0] === 'event');
+  assert.ok(grantIndex >= 0 && eventIndex > grantIndex);
 });

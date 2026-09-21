@@ -5,6 +5,7 @@ const COOKIE_SECONDS = 180 * 24 * 60 * 60;
 const PUBLIC_PAGES = new Set(['/', '/ios', '/mentions-legales', '/confidentialite', '/conditions-utilisation', '/politique-contenu', '/testeurs']);
 let memoryChoice;
 let started = false;
+let consentGranted = false;
 let lastPage;
 const listeners = new Set();
 
@@ -42,10 +43,23 @@ export function clearAnalyticsCookies() {
 
 function stopAnalytics() {
   window[`ga-disable-${MEASUREMENT_ID}`] = true;
-  // Discard queued hits, including when the remote script is still downloading.
-  if (window.dataLayer) window.dataLayer.length = 0;
+  if (consentGranted) {
+    // Discard pending hits/grants before queuing the withdrawal, never after it.
+    // Keep this page alive so gtag can process the consent update.
+    for (let i = window.dataLayer.length - 1; i >= 0; i -= 1) {
+      const command = window.dataLayer[i];
+      if (command[0] === 'event' || (command[0] === 'consent' && command[1] === 'update')) {
+        window.dataLayer.splice(i, 1);
+      }
+    }
+    window.gtag('consent', 'update', {
+      analytics_storage: 'denied', ad_storage: 'denied',
+      ad_user_data: 'denied', ad_personalization: 'denied',
+    });
+    consentGranted = false;
+    lastPage = undefined;
+  }
   clearAnalyticsCookies();
-  if (started) window.location.reload(); // Unload Google's timers and event listeners.
 }
 
 export function saveConsent(analytics) {
@@ -59,6 +73,10 @@ export function saveConsent(analytics) {
     try { window.localStorage.removeItem(CONSENT_KEY); } catch { /* Storage unavailable. */ }
   }
   if (!analytics) stopAnalytics();
+  else if (started && !consentGranted) {
+    window.gtag('consent', 'update', { analytics_storage: 'granted' });
+    consentGranted = true;
+  }
   notify();
 }
 
@@ -99,6 +117,10 @@ export function trackPage(pathname) {
     }
     return;
   }
+  if (started && !consentGranted) {
+    window.gtag('consent', 'update', { analytics_storage: 'granted' });
+    consentGranted = true;
+  }
   if (lastPage === pathname) return;
   const page = {
     page_location: `${window.location.origin}${pathname}`,
@@ -113,6 +135,7 @@ export function trackPage(pathname) {
       ad_user_data: 'denied', ad_personalization: 'denied',
     });
     window.gtag('consent', 'update', { analytics_storage: 'granted' });
+    consentGranted = true;
     window.gtag('js', new Date());
     window.gtag('config', MEASUREMENT_ID, {
       ...page, send_page_view: false,
