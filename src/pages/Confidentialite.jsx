@@ -9,17 +9,19 @@ const SECTIONS = [
   {
     title: null,
     content:
-      "L'application Re permet de partager et découvrir des recommandations culturelles entre amis. Afin de proposer ces fonctionnalités, certaines données personnelles sont nécessaires.",
+      "Cette politique concerne le site et l’application Re. Simon Lefort, éditeur de Re en France, est responsable des traitements décrits ici. La mesure d’audience Google Analytics décrite ci-dessous concerne uniquement le site web.",
   },
   {
     title: '1. Données collectées',
-    content: 'Nous collectons uniquement les informations fournies volontairement par l\'utilisateur :',
+    content: 'Les données traitées pour le compte, les fonctionnalités et les demandes de contact comprennent :',
     list: [
       'Adresse email',
       'Nom d\'utilisateur',
       'Avatar (optionnel)',
       'Liste d\'amis (optionnel)',
       'Recommandations et historique d\'utilisation (optionnel)',
+      'Informations de connexion nécessaires à l’authentification',
+      'Nom, adresse email, sujet et message transmis via le formulaire de contact',
     ],
   },
   {
@@ -29,17 +31,38 @@ const SECTIONS = [
       'Créer et gérer le compte utilisateur',
       'Afficher les recommandations entre amis',
       'Assurer le fonctionnement normal de l\'application',
+      'Répondre aux demandes adressées à l’équipe',
     ],
-    footer: 'Nous ne revendons ni ne partageons aucune donnée à des tiers.',
+    footer: 'La gestion du compte et les fonctionnalités demandées reposent sur l’exécution du service. La sécurité et le traitement des demandes de contact reposent sur notre intérêt légitime à assurer et améliorer ce service. La mesure d’audience repose sur votre consentement. Nous ne vendons pas vos données.',
   },
   {
     title: '3. Stockage et Sécurité',
     content:
-      'Les données sont stockées sur nos serveurs sécurisés en France. Les utilisateurs peuvent demander la suppression de leur compte et de toutes leurs données à tout moment.',
+      'Les données du service Re sont hébergées chez OVHcloud en France. Leur accès est limité aux personnes et prestataires qui en ont besoin pour fournir le service. Les données de compte sont conservées pendant la vie du compte ; leur suppression peut être demandée à tout moment. Les données nécessaires au traitement d’une demande sont conservées le temps de son traitement, sous réserve des obligations légales applicables. Les données Analytics sont traitées séparément par Google.',
   },
   {
-    title: '4. Contact',
-    content: 'Pour toute question ou demande concernant vos données personnelles :',
+    title: '4. Cookies et stockage local nécessaires',
+    content: 'Le navigateur conserve les éléments nécessaires à votre connexion (token, refresh_token et user) ainsi que votre choix de cookies (re-cookie-consent-v1). Ces éléments servent au fonctionnement du service et à la mémorisation de vos préférences ; ils ne sont pas utilisés pour la publicité. Le choix, positif ou négatif, est conservé six mois sur ce navigateur. Si le stockage est bloqué ou effacé, il pourra vous être demandé de nouveau.',
+  },
+  {
+    title: '5. Mesure d’audience facultative',
+    content: 'Avec votre accord uniquement, Google Analytics (Google Ireland Limited) mesure la fréquentation des pages publiques du site. Il traite des identifiants de cookies, les pages consultées, les horaires de visite et des informations techniques sur le navigateur et l’appareil. L’adresse IP est transmise lors de la connexion à Google ; Google indique ne pas la journaliser ni la stocker dans GA4. Ces données ne sont pas anonymes du seul fait de cette limitation.',
+    list: [
+      'Sans accord ou en cas de refus, la balise Google Analytics n’est pas chargée.',
+      'Les cookies _ga et _ga_LJH3S47EPV sont configurés pour une durée maximale de 180 jours sans renouvellement automatique à chaque visite.',
+      'Les pages de connexion, d’inscription, de profil, de contact, de confirmation et de réinitialisation sont exclues du suivi prévu par le site. Les paramètres d’URL et les fragments ne sont pas envoyés dans les vues de pages.',
+      'Les champs des formulaires, mots de passe, adresses email et jetons de compte ne sont pas transmis par notre suivi. Les fonctions publicitaires et Google Signals sont désactivées dans la balise.',
+      'Le retrait du consentement arrête le suivi et supprime les cookies Analytics accessibles au site. Il ne supprime pas rétroactivement les données déjà transmises.',
+    ],
+    footer: 'Vous pouvez accepter, refuser ou retirer votre accord à tout moment avec le bouton « Gérer les cookies », présent en bas de chaque page. Votre choix ne conditionne ni l’inscription ni l’accès au service.',
+  },
+  {
+    title: '6. Destinataires et transferts internationaux',
+    content: 'Google reçoit les données de mesure d’audience lorsque vous y consentez. Leur traitement peut impliquer des transferts hors de l’Union européenne, notamment vers les États-Unis. Les garanties applicables dépendent des conditions contractuelles de Google et du cadre juridique en vigueur, notamment des décisions d’adéquation applicables et, le cas échéant, des clauses contractuelles types. Les données Analytics sont conservées selon les paramètres de conservation de la propriété Google Analytics ; la durée des cookies sur votre navigateur est distincte de cette conservation.',
+  },
+  {
+    title: '7. Vos droits et contact',
+    content: 'Selon les conditions prévues par le RGPD, vous pouvez demander l’accès à vos données, leur rectification, leur effacement, la limitation du traitement et leur portabilité, ou vous opposer aux traitements fondés sur l’intérêt légitime. Le consentement peut être retiré à tout moment sans remettre en cause les traitements antérieurs. Vous pouvez également adresser une réclamation à la CNIL (cnil.fr). Pour exercer vos droits ou poser une question :',
     footer: 'Utilisez notre ',
     contactLink: true,
   },
@@ -77,6 +100,11 @@ export default function Confidentialite() {
           </Box>
 
           {/* Sections */}
+          <Box sx={{ mb: 3, display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+            <MuiLink component="button" type="button" color="secondary" onClick={() => window.dispatchEvent(new Event('re-open-cookies'))}>Gérer les cookies</MuiLink>
+            <MuiLink href="https://policies.google.com/privacy?hl=fr" color="secondary">Confidentialité Google</MuiLink>
+            <MuiLink href="https://policies.google.com/technologies/partner-sites?hl=fr" color="secondary">Utilisation des données par Google</MuiLink>
+          </Box>
           <Box
             sx={{
               background: 'rgba(10, 15, 45, 0.55)',

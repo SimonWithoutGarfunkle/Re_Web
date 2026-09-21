@@ -30,7 +30,7 @@ const SECTIONS = [
   {
     title: '3. Propriété intellectuelle',
     content:
-      "L'ensemble des éléments présents sur le site et l'application Re (textes, visuels, logo, design, éléments graphiques, code source) sont protégés par le droit de la propriété intellectuelle.",
+      "Les éléments originaux du site et de l’application Re sont protégés par le droit de la propriété intellectuelle. Les contributions des utilisateurs et les ressources provenant de tiers restent soumises aux droits de leurs auteurs et aux licences applicables.",
     footer:
       'Toute reproduction, représentation, modification ou exploitation, totale ou partielle, sans autorisation préalable est interdite.',
   },
@@ -39,13 +39,13 @@ const SECTIONS = [
     content:
       "Les informations relatives aux œuvres culturelles (films, séries, livres) affichées dans l'application Re proviennent de services tiers, notamment TMDB (The Movie Database) et OpenLibrary.",
     footer:
-      "Re n'est pas responsable du contenu fourni par ces services externes, notamment en ce qui concerne les visuels (affiches, couvertures), descriptions ou classifications.",
+      "Les droits sur ces ressources appartiennent à leurs titulaires respectifs. Les erreurs ou contenus inappropriés peuvent être signalés à l’équipe, sans préjudice des obligations légales de l’éditeur.",
   },
   {
     title: '5. Limitation de responsabilité',
     content:
-      "Re s'efforce de fournir des informations aussi précises que possible. Toutefois, l'éditeur ne pourra être tenu responsable des omissions, inexactitudes ou carences dans la mise à jour des informations.",
-    footer: "L'utilisateur est seul responsable de l'utilisation qu'il fait du site et de l'application.",
+      "Re s’efforce de fournir des informations exactes et de corriger les anomalies signalées. Des erreurs ou interruptions peuvent néanmoins survenir.",
+    footer: "Ces mentions ne limitent pas les responsabilités et garanties imposées par la loi. Les conditions générales d’utilisation précisent les règles d’accès au service.",
   },
   {
     title: '6. Contenus publiés par les utilisateurs',
@@ -80,7 +80,7 @@ export default function MentionsLegales() {
               </Box>
             </Typography>
             <Typography sx={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.85rem' }}>
-              Dernière mise à jour : avril 2026
+              Dernière mise à jour : septembre 2026
             </Typography>
             <Box
               sx={{

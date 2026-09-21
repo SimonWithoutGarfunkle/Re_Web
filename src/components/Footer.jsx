@@ -11,10 +11,6 @@ export default function Footer() {
     <Box
       component="footer"
       sx={{
-        position: 'fixed',
-        bottom: 0,
-        left: 0,
-        right: 0,
         zIndex: 1100,
         py: 1.5,
         px: { xs: 2, md: 4 },
@@ -31,6 +27,11 @@ export default function Footer() {
     >
       {/* Left — legal links */}
       <Box sx={{ display: 'flex', gap: { xs: 1.5, md: 3 }, flexWrap: 'wrap', alignItems: 'center' }}>
+        <Link component="button" type="button" color="inherit" sx={{ fontSize: '0.88rem' }}
+          onClick={() => window.dispatchEvent(new Event('re-open-cookies'))}>
+          Gérer les cookies
+        </Link>
+        <Link component={RouterLink} to="/conditions-utilisation" color="inherit" sx={{ fontSize: '0.88rem' }}>CGU</Link>
         <Link
           component={RouterLink}
           to="/mentions-legales"

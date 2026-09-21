@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Local documentation
+/docs/analytics-et-juridique.md
+
 # Environment variables
 .env
 .env.*

@@ -39,9 +39,9 @@ const SECTIONS = [
   {
     title: '4. Sources externes',
     content:
-      "Les données culturelles affichées dans l'application peuvent provenir de services tiers tels que TMDB (The Movie Database) et OpenLibrary. Re n'est pas responsable du contenu fourni par ces services. Certaines œuvres référencées proviennent de bases de données externes.",
+      "Les données culturelles affichées dans l’application peuvent provenir de services tiers tels que TMDB (The Movie Database) et OpenLibrary. Les droits sur ces ressources appartiennent à leurs titulaires respectifs, sans préjudice des obligations légales de Re.",
     footer:
-      "Les visuels associés à ces œuvres (affiches, couvertures) peuvent contenir des éléments susceptibles de heurter la sensibilité de certains utilisateurs. Re s'efforce de limiter l'affichage de contenus sensibles, mais ne peut garantir une absence totale de tels contenus. Les utilisateurs peuvent signaler tout contenu inapproprié par email.",
+      "Les visuels associés à ces œuvres (affiches, couvertures) peuvent contenir des éléments susceptibles de heurter la sensibilité de certains utilisateurs. Re s’efforce de limiter l’affichage de contenus sensibles. Les utilisateurs peuvent signaler tout contenu inapproprié via le formulaire de contact.",
   },
   {
     title: '5. Modération et signalement',
@@ -70,7 +70,7 @@ export default function PolitiqueContenu() {
               </Box>
             </Typography>
             <Typography sx={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.85rem' }}>
-              Dernière mise à jour : avril 2026
+              Dernière mise à jour : septembre 2026
             </Typography>
             <Box
               sx={{
