@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link as RouterLink, useNavigate, useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -17,7 +17,9 @@ import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { login, requestPasswordReset } from '../api/auth';
+import { login, loginWithProvider, requestPasswordReset } from '../api/auth';
+import { saveSession } from '../api/session.js';
+import SocialLogin from '../components/SocialLogin.jsx';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -27,8 +29,33 @@ export default function Login() {
   const [errors, setErrors] = useState({});
   const [apiError, setApiError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [socialBusy, setSocialBusy] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const inProgress = useRef(false);
+  const active = useRef(true);
+  useEffect(() => {
+    active.current = true;
+    return () => { active.current = false; };
+  }, []);
+
+  const connect = async (request) => {
+    if (inProgress.current || !active.current) return;
+    inProgress.current = true;
+    setLoading(true);
+    setApiError('');
+    try {
+      const data = await request();
+      if (!active.current) return;
+      saveSession(data);
+      navigate('/profile');
+    } catch (err) {
+      if (active.current) setApiError(err.message);
+    } finally {
+      inProgress.current = false;
+      if (active.current) setLoading(false);
+    }
+  };
 
   const [forgotOpen, setForgotOpen] = useState(false);
   const [forgotEmail, setForgotEmail] = useState('');
@@ -80,24 +107,13 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (socialBusy) return;
     setSubmitted(true);
     const errs = validate(values);
     setErrors(errs);
     if (Object.keys(errs).length > 0) return;
 
-    setLoading(true);
-    setApiError('');
-    try {
-      const data = await login(values.email, values.password);
-      localStorage.setItem('token', data.token ?? '');
-      localStorage.setItem('refresh_token', data.refresh_token ?? '');
-      localStorage.setItem('user', JSON.stringify(data.user ?? {}));
-      navigate('/profile');
-    } catch (err) {
-      setApiError(err.message);
-    } finally {
-      setLoading(false);
-    }
+    await connect(() => login(values.email.trim(), values.password));
   };
 
   return (
@@ -160,6 +176,13 @@ export default function Login() {
               </Alert>
             )}
 
+            <SocialLogin
+              disabled={loading || socialBusy}
+              onCredential={(provider, idToken) => connect(() => loginWithProvider(provider, idToken))}
+              onError={setApiError}
+              onPending={setSocialBusy}
+            />
+
             <TextField
               fullWidth
               label="Adresse email"
@@ -168,7 +191,7 @@ export default function Login() {
               onChange={handleChange('email')}
               error={Boolean(errors.email)}
               helperText={errors.email}
-              disabled={loading}
+              disabled={loading || socialBusy}
               slotProps={{
                 input: {
                   startAdornment: (
@@ -188,7 +211,7 @@ export default function Login() {
               onChange={handleChange('password')}
               error={Boolean(errors.password)}
               helperText={errors.password}
-              disabled={loading}
+              disabled={loading || socialBusy}
               slotProps={{
                 input: {
                   startAdornment: (
@@ -231,7 +254,7 @@ export default function Login() {
               color="secondary"
               size="large"
               fullWidth
-              disabled={loading}
+              disabled={loading || socialBusy}
               sx={{ mb: 2.5, py: 1.4, fontSize: '1rem' }}
             >
               {loading ? <CircularProgress size={22} color="inherit" /> : 'SE CONNECTER'}
