@@ -27,6 +27,7 @@ export default function SocialLogin({ disabled, onCredential, onError, onPending
 
   useEffect(() => {
     let active = true;
+    let resizeObserver;
     const container = googleButton.current;
     const report = (error) => { if (active) setSdkError(error.message); };
     if (googleClientId) {
@@ -39,15 +40,25 @@ export default function SocialLogin({ disabled, onCredential, onError, onPending
             if (active) callbacks.current.onCredential('google', response.credential);
           },
         });
-        google.renderButton(container, {
-          type: 'standard', theme: 'outline', size: 'large', text: 'signin_with', locale: 'fr',
-        });
+        let previousWidth = 0;
+        const renderButton = () => {
+          const width = Math.floor(container.getBoundingClientRect().width);
+          if (!active || !width || width === previousWidth) return;
+          previousWidth = width;
+          google.renderButton(container, {
+            type: 'standard', theme: 'outline', size: 'large', text: 'signin_with', locale: 'fr',
+            shape: 'rectangular', width: String(width),
+          });
+        };
+        renderButton();
+        resizeObserver = new ResizeObserver(renderButton);
+        resizeObserver.observe(container);
       }).catch(report);
     }
     if (appleClientId && appleRedirectURI) {
       loadApple().then((auth) => { if (active) setApple(auth); }).catch(report);
     }
-    return () => { active = false; container?.replaceChildren(); };
+    return () => { active = false; resizeObserver?.disconnect(); container?.replaceChildren(); };
   }, [retry]);
 
   const startApple = async () => {
@@ -71,11 +82,11 @@ export default function SocialLogin({ disabled, onCredential, onError, onPending
 
   return (
     <Box sx={{ mb: 3 }}>
-      <Box inert={disabled ? true : undefined} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1.5, opacity: disabled ? 0.5 : 1 }}>
-        {googleClientId && <div ref={googleButton} />}
+      <Box inert={disabled ? true : undefined} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: 320, mx: 'auto', gap: 1.5, opacity: disabled ? 0.5 : 1 }}>
+        {googleClientId && <Box ref={googleButton} sx={{ width: '100%', minHeight: 40 }} />}
         {appleClientId && appleRedirectURI && (
           <Button type="button" onClick={startApple} disabled={disabled || !apple} startIcon={<AppleIcon />}
-            sx={{ bgcolor: '#fff', color: '#000', textTransform: 'none', minHeight: 40, px: 3, '&:hover': { bgcolor: '#eee' } }}>
+            sx={{ bgcolor: '#fff', color: '#000', textTransform: 'none', width: '100%', height: 40, minHeight: 40, borderRadius: '4px', fontSize: 14, letterSpacing: 0, px: 2, '&:hover': { bgcolor: '#eee' } }}>
             Se connecter avec Apple
           </Button>
         )}
