@@ -1,4 +1,23 @@
-import { API_BASE_URL } from './config';
+import { API_BASE_URL } from './config.js';
+import { requireExistingAccount } from './session.js';
+
+export async function loginWithProvider(provider, idToken) {
+  if (!['apple', 'google'].includes(provider) || typeof idToken !== 'string' || !idToken) {
+    throw new Error('Connexion externe invalide. Recommence la connexion.');
+  }
+  const res = await fetch(`${API_BASE_URL}/api/auth/${provider}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ idToken }),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    if (res.status === 429) throw new Error('Trop de tentatives. Réessaie plus tard.');
+    if (res.status >= 500) throw new Error('Connexion temporairement indisponible. Réessaie plus tard.');
+    throw new Error(translateError(data.detail || data.message || data.title));
+  }
+  return requireExistingAccount(data, provider === 'apple' ? 'Apple' : 'Google');
+}
 
 // Messages exacts retournés par LexikJWTAuthenticationBundle (Symfony)
 const MESSAGES_FR = {

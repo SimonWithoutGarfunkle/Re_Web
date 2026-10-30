@@ -1,4 +1,4 @@
-import { API_BASE_URL } from './config';
+import { API_BASE_URL } from './config.js';
 
 function isExpired(token) {
   try {
@@ -26,8 +26,10 @@ async function doRefresh() {
   });
   if (!res.ok) throw new Error('refresh failed');
   const data = await res.json();
+  if (!data.token || !data.refresh_token) throw new Error('invalid refresh response');
   localStorage.setItem('token', data.token);
   localStorage.setItem('refresh_token', data.refresh_token);
+  if (data.user) localStorage.setItem('user', JSON.stringify(data.user));
   return data.token;
 }
 

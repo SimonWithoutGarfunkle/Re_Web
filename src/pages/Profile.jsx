@@ -452,6 +452,12 @@ export default function Profile() {
             </Box>
 
             {/* Password */}
+            {user?.hasPassword === false ? (
+              <Alert severity="info">
+                <Typography sx={{ fontWeight: 700, mb: 0.5 }}>Compte sans mot de passe</Typography>
+                Ton compte Re ne possède pas de mot de passe. Pour te connecter, utilise le bouton Apple ou Google correspondant au compte que tu as lié à Re.
+              </Alert>
+            ) : (
             <Box component="form" onSubmit={handlePasswordSave} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               <TextField
                 fullWidth
@@ -534,6 +540,7 @@ export default function Profile() {
               <Feedback {...pwdFeedback} />
               <SaveButton loading={pwdLoading} label="CHANGER LE MOT DE PASSE" />
             </Box>
+            )}
 
           </Box>
 
