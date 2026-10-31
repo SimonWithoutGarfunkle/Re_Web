@@ -32,6 +32,7 @@ export default function Footer() {
           Gérer les cookies
         </Link>
         <Link component={RouterLink} to="/conditions-utilisation" color="inherit" sx={{ fontSize: '0.88rem' }}>CGU</Link>
+        <Link component={RouterLink} to="/supprimer-mon-compte" color="inherit" sx={{ fontSize: '0.88rem' }}>Supprimer mon compte</Link>
         <Link
           component={RouterLink}
           to="/mentions-legales"

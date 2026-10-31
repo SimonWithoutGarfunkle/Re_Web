@@ -9,6 +9,7 @@ import Confidentialite from './pages/Confidentialite';
 import ConditionsUtilisation from './pages/ConditionsUtilisation';
 import PolitiqueContenu from './pages/PolitiqueContenu';
 import Profile from './pages/Profile';
+import DeleteAccount from './pages/DeleteAccount';
 import Contact from './pages/Contact';
 import Testeurs from './pages/Testeurs';
 import VerifyEmail from './pages/VerifyEmail';
@@ -33,6 +34,7 @@ export default function App() {
           <Route path="/conditions-utilisation" element={<ConditionsUtilisation />} />
           <Route path="/politique-contenu" element={<PolitiqueContenu />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/supprimer-mon-compte" element={<DeleteAccount />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/testeurs" element={<Testeurs />} />
           <Route path="/verify-email" element={<VerifyEmail />} />
