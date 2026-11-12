@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Alert, Box, Button, Checkbox, Container, FormControlLabel, Link, TextField, Typography } from '@mui/material';
 import { getDeletionProfile, deleteMyAccount } from '../api/accountDeletion.js';
@@ -28,19 +28,23 @@ export default function DeleteAccount() {
     let active = true;
     loadApple().then(auth => { if (active) setApple(auth); }).catch(() => { if (active) setAppleUnavailable(true); });
     return () => { active = false; };
-  }, [appleLinked]);
+  }, [appleLinked, profile]);
   useEffect(() => {
     if (!retryAt) return;
     const timer = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(timer);
   }, [retryAt]);
 
-  async function verify() {
+  const verify = useCallback(async () => {
     if (locked.current) return;
     locked.current = true;
     setBusy(true);
     setError('');
     setProfile(null);
+    setPassword('');
+    setManualApple(false);
+    setAppleUnavailable(false);
+    setApple(null);
     try {
       setProfile(await getDeletionProfile());
       setUncertain(false);
@@ -48,7 +52,16 @@ export default function DeleteAccount() {
       setExpired(failure.status === 401);
       setError(failure.status === 401 ? 'Reconnecte-toi pour vérifier ton compte. Une suppression éventuelle ne peut pas être confirmée ici.' : failure.message);
     } finally { locked.current = false; setBusy(false); }
-  }
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+    // Defer until after setup so Strict Mode's discarded effect cannot start a request.
+    Promise.resolve().then(() => {
+      if (active && localStorage.getItem('token')) void verify();
+    });
+    return () => { active = false; };
+  }, [verify]);
 
   async function submit(event) {
     event.preventDefault();
