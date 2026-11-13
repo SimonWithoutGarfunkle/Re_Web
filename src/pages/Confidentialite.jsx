@@ -3,6 +3,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import MuiLink from '@mui/material/Link';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { Link as RouterLink } from 'react-router-dom';
 
 const SECTIONS = [
@@ -12,16 +13,13 @@ const SECTIONS = [
       "Cette politique concerne le site et l’application Re. Simon Lefort, éditeur de Re en France, est responsable des traitements décrits ici. La mesure d’audience Google Analytics décrite ci-dessous concerne uniquement le site web.",
   },
   {
-    title: '1. Données collectées',
-    content: 'Les données traitées pour le compte, les fonctionnalités et les demandes de contact comprennent :',
+    title: '1. Les données que nous utilisons',
+    content: 'Re utilise les informations que vous fournissez et celles nécessaires au fonctionnement du service :',
     list: [
-      'Adresse email',
-      'Nom d\'utilisateur',
-      'Avatar (optionnel)',
-      'Liste d\'amis (optionnel)',
-      'Recommandations et historique d\'utilisation (optionnel)',
-      'Informations de connexion nécessaires à l’authentification',
-      'Nom, adresse email, sujet et message transmis via le formulaire de contact',
+      'Vos informations de compte et de profil, comme votre adresse email, votre pseudo et votre avatar.',
+      'Vos contenus et votre activité dans l’application : préférences culturelles, bibliothèque, avis, échanges avec vos amis et activité de jeu.',
+      'Les informations techniques nécessaires à la connexion, à la sécurité et aux notifications.',
+      'Les informations que vous transmettez à l’équipe dans vos demandes de contact ou vos signalements.',
     ],
   },
   {
@@ -29,27 +27,34 @@ const SECTIONS = [
     content: 'Ces données sont utilisées uniquement pour :',
     list: [
       'Créer et gérer le compte utilisateur',
-      'Afficher les recommandations entre amis',
-      'Assurer le fonctionnement normal de l\'application',
-      'Répondre aux demandes adressées à l’équipe',
+      'Faire fonctionner les fonctionnalités que vous utilisez et tenir compte de vos préférences',
+      'Permettre le partage et les échanges entre utilisateurs',
+      'Assurer la sécurité du service et traiter les demandes et signalements',
     ],
     footer: 'La gestion du compte et les fonctionnalités demandées reposent sur l’exécution du service. La sécurité et le traitement des demandes de contact reposent sur notre intérêt légitime à assurer et améliorer ce service. La mesure d’audience repose sur votre consentement. Nous ne vendons pas vos données.',
   },
   {
-    title: '3. Stockage et Sécurité',
+    title: '3. Hébergement et conservation',
     content:
-      'Les données du service Re sont hébergées chez OVHcloud en France. Leur accès est limité aux personnes et prestataires qui en ont besoin pour fournir le service. Les données de compte sont conservées pendant la vie du compte ; leur suppression peut être demandée à tout moment. Les données nécessaires au traitement d’une demande sont conservées le temps de son traitement, sous réserve des obligations légales applicables. Les données Analytics sont traitées séparément par Google.',
+      'L’application Re et l’ensemble des données de ses utilisateurs sont hébergés en France, chez OVHcloud. Netlify héberge uniquement ce site web. Vos données sont conservées pendant la vie de votre compte. Vous pouvez supprimer votre compte à tout moment depuis l’application ou le site.',
+    list: [
+      'Dès la confirmation de la suppression de votre compte, votre profil et vos contenus sont supprimés dans l’application. Les dernières données techniques conservées par Re (non accessible par les utilisateurs) sont effacées sous un mois maximum.',
+      'Les demandes de contact sans compte sont conservées le temps de leur traitement. Si une obligation légale impose de conserver certains éléments, seuls les éléments nécessaires sont conservés pour la durée imposée, avec un accès limité aux personnes habilitées.',
+      'La suppression du compte Re ne supprime pas vos comptes Google ou Apple, ni automatiquement les données détenues par les prestataires externes. Les cookies et la mesure d’audience suivent les règles décrites ci-dessous.',
+    ],
+    footer: 'L’accès aux données est limité aux personnes et prestataires qui en ont besoin pour fournir et sécuriser le service. Pour toute question ou pour exercer vos droits, utilisez notre ',
+    contactLink: true,
   },
   {
     title: '4. Cookies et stockage local nécessaires',
-    content: 'Le navigateur conserve les éléments nécessaires à votre connexion (token, refresh_token et user) ainsi que votre choix de cookies (re-cookie-consent-v1). Ces éléments servent au fonctionnement du service et à la mémorisation de vos préférences ; ils ne sont pas utilisés pour la publicité. Le choix, positif ou négatif, est conservé six mois sur ce navigateur. Si le stockage est bloqué ou effacé, il pourra vous être demandé de nouveau.',
+    content: 'Le navigateur conserve les éléments nécessaires à votre connexion ainsi que votre choix de cookies. Ces éléments servent au fonctionnement du service et à la mémorisation de vos préférences ; ils ne sont pas utilisés pour la publicité. Le choix, positif ou négatif, est conservé six mois sur ce navigateur. Si le stockage est bloqué ou effacé, il pourra vous être demandé de nouveau.',
   },
   {
     title: '5. Mesure d’audience facultative',
     content: 'Avec votre accord uniquement, Google Analytics (Google Ireland Limited) mesure la fréquentation des pages publiques du site. Il traite des identifiants de cookies, les pages consultées, les horaires de visite et des informations techniques sur le navigateur et l’appareil. L’adresse IP est transmise lors de la connexion à Google ; Google indique ne pas la journaliser ni la stocker dans GA4. Ces données ne sont pas anonymes du seul fait de cette limitation.',
     list: [
       'Sans accord ou en cas de refus, la balise Google Analytics n’est pas chargée.',
-      'Les cookies _ga et _ga_LJH3S47EPV sont configurés pour une durée maximale de 180 jours sans renouvellement automatique à chaque visite.',
+      'Les cookies de mesure d’audience sont configurés pour une durée maximale de 180 jours sans renouvellement automatique à chaque visite.',
       'Les pages de connexion, d’inscription, de profil, de contact, de confirmation et de réinitialisation sont exclues du suivi prévu par le site. Les paramètres d’URL et les fragments ne sont pas envoyés dans les vues de pages.',
       'Les champs des formulaires, mots de passe, adresses email et jetons de compte ne sont pas transmis par notre suivi. Les fonctions publicitaires et Google Signals sont désactivées dans la balise.',
       'Le retrait du consentement arrête le suivi et supprime les cookies Analytics accessibles au site. Il ne supprime pas rétroactivement les données déjà transmises.',
@@ -57,8 +62,15 @@ const SECTIONS = [
     footer: 'Vous pouvez accepter, refuser ou retirer votre accord à tout moment avec le bouton « Gérer les cookies », présent en bas de chaque page. Votre choix ne conditionne ni l’inscription ni l’accès au service.',
   },
   {
-    title: '6. Destinataires et transferts internationaux',
-    content: 'Google reçoit les données de mesure d’audience lorsque vous y consentez. Leur traitement peut impliquer des transferts hors de l’Union européenne, notamment vers les États-Unis. Les garanties applicables dépendent des conditions contractuelles de Google et du cadre juridique en vigueur, notamment des décisions d’adéquation applicables et, le cas échéant, des clauses contractuelles types. Les données Analytics sont conservées selon les paramètres de conservation de la propriété Google Analytics ; la durée des cookies sur votre navigateur est distincte de cette conservation.',
+    title: '6. Qui peut recevoir vos données ?',
+    content: 'Nous ne vendons pas vos données et ne les partageons pas à des fins publicitaires. Les échanges nécessaires au fonctionnement du service sont les suivants :',
+    list: [
+      'Les informations de profil et les contenus que vous partagez sont visibles par les utilisateurs concernés, selon les fonctionnalités utilisées. Les messages sont accessibles aux participants de la conversation.',
+      'OVHcloud héberge en France l’application Re et les données de ses utilisateurs. Netlify héberge uniquement ce site web et reçoit les informations nécessaires pour afficher et sécuriser les pages que vous consultez, notamment votre adresse IP. Ce fonctionnement est indépendant de la mesure d’audience facultative.',
+      'Google ou Apple interviennent si vous choisissez leur connexion. Les services de notifications mobiles, dont Expo, acheminent les notifications que vous autorisez.',
+      'Google reçoit les données de mesure d’audience du site uniquement si vous y consentez.',
+    ],
+    footer: 'Les données nécessaires à ces services externes peuvent être traitées hors de l’Union européenne, selon leurs conditions et les garanties applicables. Cela concerne l’hébergement du site web, les connexions Google ou Apple, les notifications et la mesure d’audience facultative. Le stockage des données de l’application Re reste assuré en France par OVHcloud. Les données Analytics suivent leur propre durée de conservation, définie dans les paramètres Google Analytics, distincte de celle de votre compte Re et des cookies.',
   },
   {
     title: '7. Vos droits et contact',
@@ -86,7 +98,7 @@ export default function Confidentialite() {
               </Box>
             </Typography>
             <Typography sx={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.85rem' }}>
-              Dernière mise à jour : septembre 2026
+              Dernière mise à jour : 14 novembre 2026
             </Typography>
             <Box
               sx={{
@@ -100,11 +112,6 @@ export default function Confidentialite() {
           </Box>
 
           {/* Sections */}
-          <Box sx={{ mb: 3, display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-            <MuiLink component="button" type="button" color="secondary" onClick={() => window.dispatchEvent(new Event('re-open-cookies'))}>Gérer les cookies</MuiLink>
-            <MuiLink href="https://policies.google.com/privacy?hl=fr" color="secondary">Confidentialité Google</MuiLink>
-            <MuiLink href="https://policies.google.com/technologies/partner-sites?hl=fr" color="secondary">Utilisation des données par Google</MuiLink>
-          </Box>
           <Box
             sx={{
               background: 'rgba(10, 15, 45, 0.55)',
@@ -117,7 +124,10 @@ export default function Confidentialite() {
             }}
           >
             <Typography sx={{ mb: 3 }}>
-              Tu peux <MuiLink component={RouterLink} to="/supprimer-mon-compte">supprimer ton compte RE depuis le site</MuiLink>, après connexion et confirmation, ou depuis ton profil dans l’application.
+              L’application Re et les données de ses utilisateurs sont hébergées en France, chez OVHcloud. Netlify héberge uniquement ce site web. Vos données ne sont ni vendues ni partagées à des fins publicitaires.
+            </Typography>
+            <Typography sx={{ mb: 3 }}>
+              Vous pouvez <MuiLink component={RouterLink} to="/supprimer-mon-compte">supprimer votre compte RE depuis le site</MuiLink>, après connexion et confirmation, ou depuis les paramètres de votre profil dans l’application. Les services externes et la mesure d’audience facultative sont précisés ci-dessous.
             </Typography>
             {SECTIONS.map((section, i) => (
               <Box key={i}>
@@ -178,6 +188,14 @@ export default function Confidentialite() {
                 )}
               </Box>
             ))}
+          </Box>
+          <Box sx={{ mt: 3, display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+            <MuiLink href="https://policies.google.com/privacy?hl=fr" target="_blank" rel="noopener noreferrer" color="secondary" aria-label="Confidentialité Google (nouvel onglet)" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.5 }}>
+              Confidentialité Google <OpenInNewIcon sx={{ fontSize: '1em' }} />
+            </MuiLink>
+            <MuiLink href="https://policies.google.com/technologies/partner-sites?hl=fr" target="_blank" rel="noopener noreferrer" color="secondary" aria-label="Utilisation des données par Google (nouvel onglet)" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.5 }}>
+              Utilisation des données par Google <OpenInNewIcon sx={{ fontSize: '1em' }} />
+            </MuiLink>
           </Box>
 
         </Box>
