@@ -9,18 +9,18 @@ const SECTIONS = [
   {
     title: null,
     content:
-      "Re est une application à vocation culturelle permettant de découvrir, partager et recommander des œuvres culturelles entre amis (films, séries, livres, jeux, et contenus assimilés).",
+      "Re permet de découvrir et de partager des films, séries et livres, d’échanger entre amis et de jouer à des mini-jeux culturels. Cette politique s’applique aux contenus et aux comportements dans l’ensemble de l’application.",
   },
   {
     title: '1. Nature du contenu autorisé',
     content:
-      "Les contenus publiés sur Re doivent être directement liés à une œuvre culturelle. L'application n'a pas vocation à devenir un réseau social généraliste.",
+      "Les avis et recommandations publiés dans le fil concernent des œuvres culturelles. La messagerie permet aussi des conversations personnelles, individuelles ou en groupe, avec du texte, des images et des liens.",
     footer:
-      "Il n'est par exemple pas possible de publier un simple message personnel ou un contenu sans rapport avec une œuvre culturelle identifiable.",
+      "Dans tous les espaces, y compris les profils et les conversations privées, respectez les autres utilisateurs et ne partagez que des contenus que vous êtes autorisé à diffuser. Les règles ci-dessous s’appliquent également aux images et aux liens partagés.",
   },
   {
     title: '2. Contenus interdits',
-    content: 'Les contenus suivants sont strictement interdits :',
+    content: 'Les contenus et comportements suivants sont interdits dans tous les espaces de Re :',
     list: [
       'Tout contenu illégal ou contraire aux lois en vigueur',
       'Les propos haineux, diffamatoires ou discriminatoires',
@@ -41,13 +41,18 @@ const SECTIONS = [
     content:
       "Les données culturelles affichées dans l’application peuvent provenir de services tiers tels que TMDB (The Movie Database) et OpenLibrary. Les droits sur ces ressources appartiennent à leurs titulaires respectifs, sans préjudice des obligations légales de Re.",
     footer:
-      "Les visuels associés à ces œuvres (affiches, couvertures) peuvent contenir des éléments susceptibles de heurter la sensibilité de certains utilisateurs. Re s’efforce de limiter l’affichage de contenus sensibles. Les utilisateurs peuvent signaler tout contenu inapproprié via le formulaire de contact.",
+      "Les visuels associés aux œuvres (affiches, couvertures) peuvent heurter la sensibilité de certains utilisateurs. Pour signaler une fiche ou un visuel inapproprié provenant d’un catalogue externe, indiquez l’œuvre concernée et le problème rencontré dans notre ",
+    contactLink: true,
   },
   {
     title: '5. Modération et signalement',
     content:
-      "L'application est actuellement en cours de développement. Les outils de modération sont amenés à évoluer.",
-    footer: 'Toute demande de modération ou tout signalement de contenu peut être effectué via notre ',
+      "Vous pouvez signaler un avis, un profil, un message ou un groupe directement dans l’application, à l’aide de l’option « Signaler » du contenu concerné. Précisez la raison du signalement pour aider l’équipe à examiner la situation.",
+    list: [
+      'En cas de violation des règles, Re peut retirer le contenu concerné ou restreindre, suspendre ou supprimer un compte, selon la gravité de la situation.',
+      'Vous pouvez contacter l’équipe pour demander le réexamen d’une décision de modération.',
+    ],
+    footer: 'Si le signalement intégré ne convient pas à votre situation, vous pouvez aussi décrire le problème et les éléments permettant de retrouver le contenu via notre ',
     contactLink: true,
   },
 ];
@@ -70,7 +75,7 @@ export default function PolitiqueContenu() {
               </Box>
             </Typography>
             <Typography sx={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.85rem' }}>
-              Dernière mise à jour : septembre 2026
+              Dernière mise à jour : 13 novembre 2026
             </Typography>
             <Box
               sx={{
