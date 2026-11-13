@@ -42,3 +42,13 @@ export async function signInApple(auth, clientId, redirectURI) {
   }
   return result.authorization.id_token;
 }
+
+export async function authorizeAppleDeletion(auth, clientId, redirectURI) {
+  const state = crypto.randomUUID();
+  auth.init({ clientId, redirectURI, scope: 'email', state, usePopup: true });
+  const result = await auth.signIn();
+  if (result?.authorization?.state !== state || !result.authorization.code) {
+    throw new Error('Confirmation Apple invalide. Réessaie.');
+  }
+  return { authorizationCode: result.authorization.code, clientId };
+}

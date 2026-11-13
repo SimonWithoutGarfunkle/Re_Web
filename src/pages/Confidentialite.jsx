@@ -116,6 +116,9 @@ export default function Confidentialite() {
               py: { xs: 4, sm: 5 },
             }}
           >
+            <Typography sx={{ mb: 3 }}>
+              Tu peux <MuiLink component={RouterLink} to="/supprimer-mon-compte">supprimer ton compte RE depuis le site</MuiLink>, après connexion et confirmation, ou depuis ton profil dans l’application.
+            </Typography>
             {SECTIONS.map((section, i) => (
               <Box key={i}>
                 {section.title && (

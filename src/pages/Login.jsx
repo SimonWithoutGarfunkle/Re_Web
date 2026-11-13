@@ -48,7 +48,7 @@ export default function Login() {
       const data = await request();
       if (!active.current) return;
       saveSession(data);
-      navigate('/profile');
+      navigate(new URLSearchParams(location.search).get('next') === 'delete-account' ? '/supprimer-mon-compte' : '/profile');
     } catch (err) {
       if (active.current) setApiError(err.message);
     } finally {

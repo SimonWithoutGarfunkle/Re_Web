@@ -39,11 +39,11 @@ async function doRefresh() {
  * - Retry une fois sur 401 (refresh réactif).
  * - Déconnexion forcée si le refresh échoue.
  */
-export async function apiFetch(path, options = {}) {
+export async function apiFetch(path, { skipAuthRetry = false, ...options } = {}) {
   let token = localStorage.getItem('token');
 
   // Refresh proactif
-  if (token && isExpired(token)) {
+  if (!skipAuthRetry && token && isExpired(token)) {
     try { token = await doRefresh(); }
     catch { forceLogout(); throw new Error('Session expirée, reconnecte-toi.'); }
   }
@@ -55,7 +55,7 @@ export async function apiFetch(path, options = {}) {
   });
 
   // Refresh réactif sur 401
-  if (res.status === 401) {
+  if (!skipAuthRetry && res.status === 401) {
     try {
       token = await doRefresh();
       return fetch(`${API_BASE_URL}${path}`, {

@@ -568,6 +568,7 @@ export default function Profile() {
             SE DÉCONNECTER
           </Button>
 
+          <Button fullWidth color="error" sx={{ mt: 2 }} onClick={() => navigate('/supprimer-mon-compte')}>Supprimer mon compte</Button>
         </Box>
       </Container>
     </Box>
