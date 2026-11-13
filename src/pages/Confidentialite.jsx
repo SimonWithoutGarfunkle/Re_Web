@@ -36,8 +36,14 @@ const SECTIONS = [
   {
     title: '3. Hébergement et conservation',
     content:
-      'Les données de votre compte et de votre activité sont hébergées par Re chez OVHcloud, en France. Nous les conservons tant que votre compte est actif et les supprimons lorsque vous supprimez votre compte. Vous pouvez effectuer cette suppression depuis l’application ou le site. L’accès aux données est limité aux personnes et prestataires qui en ont besoin pour fournir et sécuriser le service.',
-    footer: 'Les demandes de contact sans compte sont conservées le temps de leur traitement. Les cookies du site et les données de mesure d’audience suivent les règles distinctes décrites ci-dessous.',
+      'L’application Re et l’ensemble des données de ses utilisateurs sont hébergés en France, chez OVHcloud. Netlify héberge uniquement ce site web. Vos données sont conservées pendant la vie de votre compte. Vous pouvez supprimer votre compte à tout moment depuis l’application ou le site.',
+    list: [
+      'Dès la confirmation de la suppression de votre compte, votre profil et vos contenus sont supprimés dans l’application. Les dernières données techniques conservées par Re (non accessible par les utilisateurs) sont effacées sous un mois maximum.',
+      'Les demandes de contact sans compte sont conservées le temps de leur traitement. Si une obligation légale impose de conserver certains éléments, seuls les éléments nécessaires sont conservés pour la durée imposée, avec un accès limité aux personnes habilitées.',
+      'La suppression du compte Re ne supprime pas vos comptes Google ou Apple, ni automatiquement les données détenues par les prestataires externes. Les cookies et la mesure d’audience suivent les règles décrites ci-dessous.',
+    ],
+    footer: 'L’accès aux données est limité aux personnes et prestataires qui en ont besoin pour fournir et sécuriser le service. Pour toute question ou pour exercer vos droits, utilisez notre ',
+    contactLink: true,
   },
   {
     title: '4. Cookies et stockage local nécessaires',
@@ -60,10 +66,11 @@ const SECTIONS = [
     content: 'Nous ne vendons pas vos données et ne les partageons pas à des fins publicitaires. Les échanges nécessaires au fonctionnement du service sont les suivants :',
     list: [
       'Les informations de profil et les contenus que vous partagez sont visibles par les utilisateurs concernés, selon les fonctionnalités utilisées. Les messages sont accessibles aux participants de la conversation.',
-      'Nos prestataires techniques interviennent pour fournir le service : OVHcloud pour l’hébergement, Google ou Apple si vous choisissez leur connexion, et les services de notifications mobiles, dont Expo, pour acheminer les notifications que vous autorisez.',
+      'OVHcloud héberge en France l’application Re et les données de ses utilisateurs. Netlify héberge uniquement ce site web et reçoit les informations nécessaires pour afficher et sécuriser les pages que vous consultez, notamment votre adresse IP. Ce fonctionnement est indépendant de la mesure d’audience facultative.',
+      'Google ou Apple interviennent si vous choisissez leur connexion. Les services de notifications mobiles, dont Expo, acheminent les notifications que vous autorisez.',
       'Google reçoit les données de mesure d’audience du site uniquement si vous y consentez.',
     ],
-    footer: 'L’hébergement de Re en France ne signifie pas que tous ces services externes traitent leurs données en France. Leur utilisation peut impliquer des transferts hors de l’Union européenne, selon leurs conditions et les garanties applicables. Les données Analytics sont conservées selon les paramètres de la propriété Google Analytics, indépendamment de la durée de vie de votre compte Re et de celle des cookies sur votre navigateur.',
+    footer: 'Les données nécessaires à ces services externes peuvent être traitées hors de l’Union européenne, selon leurs conditions et les garanties applicables. Cela concerne l’hébergement du site web, les connexions Google ou Apple, les notifications et la mesure d’audience facultative. Le stockage des données de l’application Re reste assuré en France par OVHcloud. Les données Analytics suivent leur propre durée de conservation, définie dans les paramètres Google Analytics, distincte de celle de votre compte Re et des cookies.',
   },
   {
     title: '7. Vos droits et contact',
@@ -91,7 +98,7 @@ export default function Confidentialite() {
               </Box>
             </Typography>
             <Typography sx={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.85rem' }}>
-              Dernière mise à jour : 13 novembre 2026
+              Dernière mise à jour : 14 novembre 2026
             </Typography>
             <Box
               sx={{
@@ -117,7 +124,7 @@ export default function Confidentialite() {
             }}
           >
             <Typography sx={{ mb: 3 }}>
-              Vos données de compte sont hébergées en France et ne sont ni vendues ni partagées à des fins publicitaires. Elles sont conservées tant que votre compte est actif, puis supprimées avec celui-ci.
+              L’application Re et les données de ses utilisateurs sont hébergées en France, chez OVHcloud. Netlify héberge uniquement ce site web. Vos données ne sont ni vendues ni partagées à des fins publicitaires.
             </Typography>
             <Typography sx={{ mb: 3 }}>
               Vous pouvez <MuiLink component={RouterLink} to="/supprimer-mon-compte">supprimer votre compte RE depuis le site</MuiLink>, après connexion et confirmation, ou depuis les paramètres de votre profil dans l’application. Les services externes et la mesure d’audience facultative sont précisés ci-dessous.

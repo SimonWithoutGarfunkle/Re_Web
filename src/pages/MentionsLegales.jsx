@@ -18,12 +18,17 @@ const SECTIONS = [
   },
   {
     title: '2. Hébergement',
-    content: 'Le site et les services associés sont hébergés par :',
+    content: 'L’application Re et l’ensemble des données de ses utilisateurs sont hébergés en France, chez OVHcloud. Netlify héberge uniquement ce site web.',
     lines: [
-      'OVH SAS (OVHcloud)',
+      'Application Re et données des utilisateurs : OVH SAS (OVHcloud)',
       'RCS Lille Métropole 424 761 419',
       'Siège social : 2 rue Kellermann, 59100 Roubaix, France',
+      'Téléphone : 1007 depuis la France ; +33 9 72 10 10 07 depuis l’étranger',
       'Site web : ovhcloud.com',
+      null,
+      'Site web : Netlify, Inc.',
+      'Adresse : 101 2nd Street, San Francisco, CA 94105, États-Unis',
+      'Contact : support@netlify.com — netlify.com/support',
     ],
   },
   {
@@ -79,7 +84,7 @@ export default function MentionsLegales() {
               </Box>
             </Typography>
             <Typography sx={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.85rem' }}>
-              Dernière mise à jour : 13 novembre 2026
+              Dernière mise à jour : 14 novembre 2026
             </Typography>
             <Box
               sx={{
@@ -126,7 +131,9 @@ export default function MentionsLegales() {
                       borderLeft: '2px solid rgba(0,229,255,0.2)',
                     }}
                   >
-                    {section.lines.map((line, j) => (
+                    {section.lines.map((line, j) => line === null ? (
+                      <Divider key={j} sx={{ borderColor: 'rgba(0,229,255,0.15)', my: 2 }} />
+                    ) : (
                       <Typography
                         key={j}
                         sx={{
