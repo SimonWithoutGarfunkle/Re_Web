@@ -7,22 +7,21 @@ import { Link as RouterLink } from 'react-router-dom';
 
 const SECTIONS = [
   {
-    title: "1. Éditeur de l'application",
-    content: "Le présent site et l'application Re sont édités par :",
+    title: "1. Éditeur du site et de l’application",
+    content: "Re est un projet personnel édité à titre non professionnel par :",
     lines: [
       'Simon Lefort',
-      'Développeur indépendant',
       'France',
     ],
     contactLink: true,
-    footer: 'Responsable de la publication : Simon Lefort  ',
+    footer: 'Directeur de la publication : Simon Lefort.',
   },
   {
     title: '2. Hébergement',
     content: 'Le site et les services associés sont hébergés par :',
     lines: [
-      'OVHcloud',
-      'RCS Lille Métropole 424 761 419 00045',
+      'OVH SAS (OVHcloud)',
+      'RCS Lille Métropole 424 761 419',
       'Siège social : 2 rue Kellermann, 59100 Roubaix, France',
       'Site web : ovhcloud.com',
     ],
@@ -50,7 +49,7 @@ const SECTIONS = [
   {
     title: '6. Contenus publiés par les utilisateurs',
     content:
-      "Les utilisateurs peuvent publier des contenus dans l'application. Ils sont seuls responsables des contenus qu'ils partagent.",
+      "Les utilisateurs peuvent publier des contenus dans l’application. Ils sont responsables des contenus qu’ils partagent, sans préjudice des obligations de Re.",
     footer:
       "Re se réserve le droit de supprimer tout contenu ne respectant pas la politique de contenu ou les lois en vigueur.",
   },
@@ -80,7 +79,7 @@ export default function MentionsLegales() {
               </Box>
             </Typography>
             <Typography sx={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.85rem' }}>
-              Dernière mise à jour : septembre 2026
+              Dernière mise à jour : 13 novembre 2026
             </Typography>
             <Box
               sx={{
@@ -159,7 +158,7 @@ export default function MentionsLegales() {
                     }}
                   >
                     {section.footer}
-                    {section.contactLink && (
+                    {section.contactLink && !section.lines && (
                       <MuiLink component={RouterLink} to="/contact" sx={{ color: '#b026ff', textDecorationColor: '#b026ff' }}>
                         formulaire de contact
                       </MuiLink>
