@@ -27,12 +27,6 @@ export default function Footer() {
     >
       {/* Left — legal links */}
       <Box sx={{ display: 'flex', gap: { xs: 1.5, md: 3 }, flexWrap: 'wrap', alignItems: 'center' }}>
-        <Link component="button" type="button" color="inherit" sx={{ fontSize: '0.88rem' }}
-          onClick={() => window.dispatchEvent(new Event('re-open-cookies'))}>
-          Gérer les cookies
-        </Link>
-        <Link component={RouterLink} to="/conditions-utilisation" color="inherit" sx={{ fontSize: '0.88rem' }}>CGU</Link>
-        <Link component={RouterLink} to="/supprimer-mon-compte" color="inherit" sx={{ fontSize: '0.88rem' }}>Supprimer mon compte</Link>
         <Link
           component={RouterLink}
           to="/mentions-legales"
@@ -45,6 +39,20 @@ export default function Footer() {
           }}
         >
           Mentions légales
+        </Link>
+        <Typography aria-hidden="true" sx={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.88rem' }}>|</Typography>
+        <Link
+          component={RouterLink}
+          to="/conditions-utilisation"
+          underline="none"
+          sx={{
+            color: 'rgba(255,255,255,0.7)',
+            fontSize: '0.88rem',
+            transition: 'color 0.2s',
+            '&:hover': { color: '#fff' },
+          }}
+        >
+          CGU
         </Link>
         <Typography sx={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.88rem' }}>|</Typography>
         <Link
@@ -87,6 +95,21 @@ export default function Footer() {
           }}
         >
           Contact
+        </Link>
+        <Typography aria-hidden="true" sx={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.88rem' }}>|</Typography>
+        <Link
+          component="button"
+          type="button"
+          underline="none"
+          onClick={() => window.dispatchEvent(new Event('re-open-cookies'))}
+          sx={{
+            color: 'rgba(255,255,255,0.7)',
+            fontSize: '0.88rem',
+            transition: 'color 0.2s',
+            '&:hover': { color: '#fff' },
+          }}
+        >
+          Gérer les cookies
         </Link>
       </Box>
 
