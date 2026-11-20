@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import FeatureCards from '../components/FeatureCards';
 import DevsSection from '../components/DevsSection';
+import DownloadPanel from '../components/DownloadPanel';
 
 const magentaButtonSx = {
   border: '1px solid rgba(255, 0, 200, 0.65)',
@@ -53,7 +54,7 @@ export default function Home() {
           alignItems: 'center',
           justifyContent: 'center',
           textAlign: 'center',
-          py: { xs: 8, md: 6 },
+          py: { xs: 4, md: 6 },
         }}
       >
         <Container maxWidth="md">
@@ -93,7 +94,7 @@ export default function Home() {
                 color: 'rgba(255,255,255,0.9)',
                 fontSize: { xs: '1rem', md: '1.15rem' },
                 lineHeight: 1.75,
-                mb: 5,
+                mb: 3,
                 maxWidth: 540,
                 mx: 'auto',
                 textShadow: '0 1px 12px rgba(0,0,0,1), 0 0 30px rgba(0,0,0,0.8)',
@@ -139,6 +140,7 @@ export default function Home() {
           #developpeurs — Les Devs
       ════════════════════════════════ */}
       <DevsSection />
+      <DownloadPanel />
 
     </Box>
   );
