@@ -55,9 +55,14 @@ Bien que ce site ne soit pas l'application, les utilisateurs inscrits peuvent g�
 
 ---
 
-## 📲 L'application arrive bientôt
+## 📲 Télécharger l'application
 
-RE est actuellement en développement. La version iOS est en chemin. 🚀
+RE est disponible gratuitement sur iPhone et Android :
+
+- [App Store](https://apps.apple.com/us/app/re/id6783426060)
+- [Google Play](https://play.google.com/store/apps/details?id=fr.re.app)
+
+Ce n'est que la première version : la suite se construit avec vos retours. 🚀
 
 ---
 

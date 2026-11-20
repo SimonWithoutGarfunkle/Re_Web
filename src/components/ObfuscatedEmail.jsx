@@ -1,7 +1,5 @@
 import Box from '@mui/material/Box';
-
-const U = 're.lasoce';
-const D = 'gmail.com';
+import { EMAIL_USER, EMAIL_DOMAIN } from '../utils/contactEmail';
 
 // Rendered as &#64; in HTML so basic email scrapers won't detect the address.
 export default function ObfuscatedEmail({ sx }) {
@@ -9,7 +7,7 @@ export default function ObfuscatedEmail({ sx }) {
     <Box
       component="span"
       sx={sx}
-      dangerouslySetInnerHTML={{ __html: `${U}&#64;${D}` }}
+      dangerouslySetInnerHTML={{ __html: `${EMAIL_USER}&#64;${EMAIL_DOMAIN}` }}
     />
   );
 }

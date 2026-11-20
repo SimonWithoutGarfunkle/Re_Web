@@ -296,21 +296,25 @@ export default function Register() {
             />
 
             <FormControlLabel
-              sx={{ alignItems: 'flex-start', mb: 1 }}
+              // Last child wraps the label and its "required" asterisk; keep both inline.
+              sx={{ alignItems: 'flex-start', mb: 1, '& > :last-child': { pt: 1 } }}
               control={<Checkbox checked={acceptedTerms} onChange={(event) => setAcceptedTerms(event.target.checked)} disabled={loading} required />}
-              label={<Typography variant="body2" sx={{ pt: 1 }}>J’accepte les <Link component={RouterLink} to="/conditions-utilisation" target="_blank" rel="noopener" color="secondary">conditions générales d’utilisation</Link>.</Typography>}
+              label={
+                <Typography component="span" variant="body2">
+                  J’accepte les <Link component={RouterLink} to="/conditions-utilisation" target="_blank" rel="noopener" color="secondary">Conditions d’utilisation</Link> et
+                  la <Link component={RouterLink} to="/politique-contenu" target="_blank" rel="noopener" color="secondary">Politique de contenu</Link> et
+                  j’ai pris connaissance de la <Link component={RouterLink} to="/confidentialite" target="_blank" rel="noopener" color="secondary">Politique de confidentialité</Link>.
+                </Typography>
+              }
             />
-            {submitted && !acceptedTerms && <Typography role="alert" color="error" variant="body2" sx={{ mb: 1 }}>Veuillez accepter les CGU pour créer votre compte.</Typography>}
-            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-              Pour en savoir plus sur vos données, consultez la <Link component={RouterLink} to="/confidentialite" target="_blank" rel="noopener" color="secondary">politique de confidentialité</Link>. La mesure d’audience reste facultative.
-            </Typography>
+            {submitted && !acceptedTerms && <Typography role="alert" color="error" variant="body2" sx={{ mb: 1 }}>Veuillez accepter les Conditions d’utilisation et la Politique de contenu pour créer votre compte.</Typography>}
             <Button
               type="submit"
               variant="outlined"
               size="large"
               fullWidth
               disabled={loading}
-              sx={{ ...magentaButtonSx, mb: 2.5 }}
+              sx={{ ...magentaButtonSx, mt: 2, mb: 2.5 }}
             >
               {loading ? <CircularProgress size={22} color="inherit" /> : "S'INSCRIRE"}
             </Button>

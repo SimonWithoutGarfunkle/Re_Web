@@ -54,18 +54,18 @@ test('single initialization and deduplicated public views, no URL parameters', a
   api.saveConsent(true);
   api.trackPage('/');
   api.trackPage('/');
-  api.trackPage('/ios');
+  api.trackPage('/telecharger');
   assert.equal(scripts.length, 1);
   assert.equal(scripts[0].referrerPolicy, 'no-referrer');
   const events = window.dataLayer.filter((args) => args[0] === 'event');
   assert.equal(events.length, 2);
-  assert.equal(events[1][2].page_location, 'https://re.example/ios');
+  assert.equal(events[1][2].page_location, 'https://re.example/telecharger');
   assert.equal(events[1][2].page_referrer, '');
   const config = window.dataLayer.find((args) => args[0] === 'config')[2];
   assert.equal(config.send_page_view, false);
   assert.equal(config.allow_google_signals, false);
   assert.equal(config.cookie_update, false);
-  api.trackPage('/ios?email=private');
+  api.trackPage('/telecharger?email=private');
   assert.equal(window[`ga-disable-${api.MEASUREMENT_ID}`], true);
 });
 
@@ -147,7 +147,7 @@ test('repeated consent checks preserve the withdrawal while the script loads', a
   api.saveConsent(false);
   handlers.timer();
   handlers.focus();
-  api.trackPage('/ios');
+  api.trackPage('/telecharger');
   assertWithdrawn(api);
   assert.ok(window.dataLayer.some((args) => args[0] === 'config'));
   stop();

@@ -1,28 +1,14 @@
 import { useEffect } from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import FeatureCards from '../components/FeatureCards';
 import DevsSection from '../components/DevsSection';
-import DownloadPanel from '../components/DownloadPanel';
-
-const magentaButtonSx = {
-  border: '1px solid rgba(255, 0, 200, 0.65)',
-  color: '#ff00c8',
-  bgcolor: 'transparent',
-  boxShadow: '0 0 10px rgba(255, 0, 200, 0.2)',
-  fontWeight: 700,
-  transition: 'all 0.3s ease',
-  '&:hover': {
-    borderColor: '#ff00c8',
-    bgcolor: 'rgba(255, 0, 200, 0.09)',
-    boxShadow: '0 0 22px rgba(255, 0, 200, 0.55), 0 0 45px rgba(255, 0, 200, 0.2)',
-    color: '#ff40d8',
-    transform: 'translateY(-1px)',
-  },
-};
+import StoreButtons from '../components/StoreButtons';
+import DownloadCard from '../components/DownloadCard';
 
 export default function Home() {
   const location = useLocation();
@@ -54,7 +40,7 @@ export default function Home() {
           alignItems: 'center',
           justifyContent: 'center',
           textAlign: 'center',
-          py: { xs: 4, md: 6 },
+          py: { xs: 6, md: 6 },
         }}
       >
         <Container maxWidth="md">
@@ -94,7 +80,7 @@ export default function Home() {
                 color: 'rgba(255,255,255,0.9)',
                 fontSize: { xs: '1rem', md: '1.15rem' },
                 lineHeight: 1.75,
-                mb: 3,
+                mb: 4,
                 maxWidth: 540,
                 mx: 'auto',
                 textShadow: '0 1px 12px rgba(0,0,0,1), 0 0 30px rgba(0,0,0,0.8)',
@@ -107,25 +93,24 @@ export default function Home() {
               </Box>
             </Typography>
 
-            <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', justifyContent: 'center' }}>
-              <Button
-                variant="outlined"
-                color="secondary"
-                size="large"
-                onClick={() => document.getElementById('projet')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                DÉCOUVRIR L'APPLI
-              </Button>
-              <Button
-                variant="outlined"
-                size="large"
-                component={RouterLink}
-                to="/register"
-                sx={magentaButtonSx}
-              >
-                INSCRIPTION
-              </Button>
-            </Box>
+            <StoreButtons />
+
+            <Button
+              variant="text"
+              color="inherit"
+              endIcon={<KeyboardArrowDown />}
+              onClick={() => document.getElementById('projet')?.scrollIntoView({ behavior: 'smooth' })}
+              sx={{
+                mt: 3,
+                px: 2,
+                color: 'rgba(255,255,255,0.8)',
+                fontWeight: 600,
+                textShadow: '0 1px 12px rgba(0,0,0,1)',
+                '&:hover': { color: '#00e5ff', bgcolor: 'transparent', textShadow: '0 0 14px rgba(0,229,255,0.6)' },
+              }}
+            >
+              Découvrir l'appli
+            </Button>
 
           </Box>
         </Container>
@@ -140,7 +125,15 @@ export default function Home() {
           #developpeurs — Les Devs
       ════════════════════════════════ */}
       <DevsSection />
-      <DownloadPanel />
+
+      {/* ════════════════════════════════
+          #telecharger — Télécharger
+      ════════════════════════════════ */}
+      <Box id="telecharger" sx={{ pb: { xs: 8, md: 10 }, scrollMarginTop: 80 }}>
+        <Container maxWidth="md">
+          <DownloadCard />
+        </Container>
+      </Box>
 
     </Box>
   );

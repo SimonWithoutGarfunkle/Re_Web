@@ -2,7 +2,7 @@ export const MEASUREMENT_ID = 'G-LJH3S47EPV';
 export const CONSENT_KEY = 're-cookie-consent-v1';
 const VERSION = 1;
 const COOKIE_SECONDS = 180 * 24 * 60 * 60;
-const PUBLIC_PAGES = new Set(['/', '/ios', '/mentions-legales', '/confidentialite', '/conditions-utilisation', '/politique-contenu', '/testeurs']);
+const PUBLIC_PAGES = new Set(['/', '/telecharger', '/mentions-legales', '/confidentialite', '/conditions-utilisation', '/politique-contenu', '/soutenir']);
 let memoryChoice;
 let started = false;
 let consentGranted = false;

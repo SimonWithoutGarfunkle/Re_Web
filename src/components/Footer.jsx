@@ -4,7 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import Link from '@mui/material/Link';
 import { Link as RouterLink } from 'react-router-dom';
 import Apple from '@mui/icons-material/Apple';
-import Android from '@mui/icons-material/Android';
+import GooglePlayIcon from './GooglePlayIcon';
 import { getStoreLinks } from '../utils/storeLinks';
 
 export default function Footer() {
@@ -154,7 +154,7 @@ export default function Footer() {
             },
           }}
         >
-          <Android sx={{ fontSize: 22 }} />
+          <GooglePlayIcon sx={{ fontSize: 20 }} />
         </IconButton>
       </Box>
     </Box>
