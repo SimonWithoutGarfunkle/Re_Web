@@ -16,9 +16,7 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import CheckIcon from '@mui/icons-material/Check';
 import StoreButtons from '../components/StoreButtons';
 import EmailAction from '../components/EmailAction';
-import { detectPlatform } from '../utils/storeLinks';
-
-const SHARE_URL = `${globalThis.location?.origin ?? ''}/telecharger`;
+import { detectPlatform, DOWNLOAD_PAGE_URL as SHARE_URL } from '../utils/storeLinks';
 const SHARE_TEXT = 'Rejoins-moi sur RE pour partager nos recos films, séries et livres !';
 
 const CYAN = { rgb: '0, 229, 255', hex: '#00e5ff' };

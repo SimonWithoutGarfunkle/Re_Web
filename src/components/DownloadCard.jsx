@@ -2,9 +2,8 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { QRCodeSVG } from 'qrcode.react';
 import StoreButtons from './StoreButtons';
-
 // Single link for every device: /telecharger sends phones to their store.
-const DOWNLOAD_PAGE_URL = `${globalThis.location?.origin ?? ''}/telecharger`;
+import { DOWNLOAD_PAGE_URL } from '../utils/storeLinks';
 
 export default function DownloadCard({ headingComponent = 'h2' }) {
   return (

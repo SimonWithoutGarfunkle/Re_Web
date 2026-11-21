@@ -5,7 +5,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import SecurityIcon from '@mui/icons-material/Security';
-import CodeIcon from '@mui/icons-material/Code';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 
 const FEATURES = [
@@ -24,7 +24,7 @@ const FEATURES = [
     Icon: SecurityIcon,
     title: 'Les bonnes personnes, pour des recommandations qui comptent',
     description:
-      "Pas besoin de 1000 contacts. Fini le scroll infini : ici, chaque reco a une raison de t'intéresser.",
+      "Pas besoin de 1000 contacts. Quelques proches dont tu connais vraiment les goûts valent mieux que des millions de notes anonymes.",
     color: '#00e5ff',
     glowColor: 'rgba(0, 229, 255, 0.3)',
     borderColor: 'rgba(0, 229, 255, 0.35)',
@@ -32,10 +32,10 @@ const FEATURES = [
   },
   {
     type: 'icon',
-    Icon: CodeIcon,
-    title: 'Zéro algorithme',
+    Icon: VisibilityIcon,
+    title: 'Zéro boîte noire',
     description:
-      "Pas de machine qui te pousse toujours les mêmes contenus. Sur Re, tout vient d'humains. Des goûts réels. Des avis sincères. Des recommandations qui ont du sens.",
+      "Ici, rien ne sort de nulle part : chaque reco vient de quelqu'un que tu connais, et chaque suggestion de Re te dit pourquoi elle est là.",
     color: '#ff00c8',
     glowColor: 'rgba(255, 0, 200, 0.3)',
     borderColor: 'rgba(255, 0, 200, 0.35)',

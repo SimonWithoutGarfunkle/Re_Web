@@ -1,6 +1,9 @@
 export const APP_STORE_URL = 'https://apps.apple.com/us/app/re/id6783426060';
 export const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=fr.re.app';
 
+// Hardcoded (not window.location) so the QR code and shared link always point to production.
+export const DOWNLOAD_PAGE_URL = 'https://web.simonwithoutgarfunkle.fr/telecharger';
+
 export function detectPlatform(device = globalThis.navigator) {
   const userAgent = device?.userAgent || '';
   if (/iPhone|iPad|iPod/i.test(userAgent) || (/Macintosh/i.test(userAgent) && device?.maxTouchPoints > 1)) return 'ios';
