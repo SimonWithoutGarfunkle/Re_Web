@@ -19,15 +19,15 @@ Ce n'est **pas** une version web de l'app. Pas de feed, pas de recommandations, 
 
 Des centaines de suggestions partout… et pourtant rien à lancer.
 
-**RE** résout ce problème d'une façon simple : plutôt qu'un algorithme qui te noie dans du contenu, RE te montre ce que **tes amis aiment vraiment**.
+**RE** résout ce problème d'une façon simple : plutôt qu'une boîte noire nourrie aux avis de millions d'inconnus, RE te montre ce que **tes amis aiment vraiment**.
 
 ### 💡 Les grands principes
 
 | | |
 |---|---|
 | 🎭 | **Un réseau culturel, pas social** — Ici, on partage ce qu'on regarde, ce qu'on lit, ce qu'on aime. RE est centré sur une seule chose : les œuvres qui marquent. |
-| 👥 | **Les bonnes personnes** — Pas besoin de 1000 contacts. Chaque recommandation vient de quelqu'un en qui tu as confiance. |
-| 🚫 | **Zéro algorithme** — Pas de machine qui te pousse toujours les mêmes contenus. Tout vient d'humains, avec des goûts réels et des avis sincères. |
+| 👥 | **Les bonnes personnes** — Pas besoin de 1000 contacts. Quelques proches dont tu connais vraiment les goûts valent mieux que des millions de notes anonymes. |
+| 🔍 | **Zéro boîte noire** — Ici, rien ne sort de nulle part : chaque reco vient de quelqu'un que tu connais, et chaque suggestion de RE te dit pourquoi elle est là. |
 | 🎮 | **Un réseau vivant** — Quiz, défis, mini-jeux… RE crée des interactions autour de la culture, pas juste une liste d'avis. |
 
 ---
@@ -55,9 +55,14 @@ Bien que ce site ne soit pas l'application, les utilisateurs inscrits peuvent g�
 
 ---
 
-## 📲 L'application arrive bientôt
+## 📲 Télécharger l'application
 
-RE est actuellement en développement. La version iOS est en chemin. 🚀
+RE est disponible gratuitement sur iPhone et Android :
+
+- [App Store](https://apps.apple.com/us/app/re/id6783426060)
+- [Google Play](https://play.google.com/store/apps/details?id=fr.re.app)
+
+Ce n'est que la première version : la suite se construit avec vos retours. 🚀
 
 ---
 

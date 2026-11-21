@@ -4,9 +4,11 @@ import IconButton from '@mui/material/IconButton';
 import Link from '@mui/material/Link';
 import { Link as RouterLink } from 'react-router-dom';
 import Apple from '@mui/icons-material/Apple';
-import Android from '@mui/icons-material/Android';
+import GooglePlayIcon from './GooglePlayIcon';
+import { getStoreLinks } from '../utils/storeLinks';
 
 export default function Footer() {
+  const storeLinks = getStoreLinks();
   return (
     <Box
       component="footer"
@@ -120,8 +122,9 @@ export default function Footer() {
         </Typography>
         <IconButton
           size="small"
-          component={RouterLink}
-          to="/ios"
+          href={storeLinks.apple}
+          target={storeLinks.target}
+          rel="noopener noreferrer"
           aria-label="App Store"
           sx={{
             color: 'rgba(255,255,255,0.7)',
@@ -137,8 +140,8 @@ export default function Footer() {
         </IconButton>
         <IconButton
           size="small"
-          href="https://play.google.com/store/apps/details?id=fr.re.app"
-          target="_blank"
+          href={storeLinks.google}
+          target={storeLinks.target}
           rel="noopener noreferrer"
           aria-label="Google Play"
           sx={{
@@ -151,7 +154,7 @@ export default function Footer() {
             },
           }}
         >
-          <Android sx={{ fontSize: 22 }} />
+          <GooglePlayIcon sx={{ fontSize: 20 }} />
         </IconButton>
       </Box>
     </Box>

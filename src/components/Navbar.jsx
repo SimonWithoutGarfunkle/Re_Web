@@ -14,14 +14,19 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import Apple from '@mui/icons-material/Apple';
+import FileDownloadOutlined from '@mui/icons-material/FileDownloadOutlined';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import GooglePlayIcon from './GooglePlayIcon';
+import StoreButtons from './StoreButtons';
+import { getStoreLinks } from '../utils/storeLinks';
 
 const NAV_LINKS = [
   { label: "L'Appli", id: 'appli' },
   { label: 'Le Projet', id: 'projet' },
   { label: 'Les Développeurs', id: 'developpeurs' },
-  { label: 'Testeurs', path: '/testeurs' },
+  { label: 'Soutenir', path: '/soutenir' },
 ];
 
 
@@ -42,10 +47,12 @@ const magentaButtonSx = {
   },
 };
 
+const PLATFORM_ICONS = { ios: Apple, android: GooglePlayIcon, desktop: FileDownloadOutlined };
+
 export default function Navbar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -57,6 +64,14 @@ export default function Navbar() {
       navigate('/', { state: { scrollTo: id } });
     }
   };
+
+  const storeLinks = getStoreLinks();
+  const DownloadIcon = PLATFORM_ICONS[storeLinks.platform];
+  // On a phone, go straight to its store; elsewhere, show both stores and the QR code.
+  const nativeStoreHref = { ios: storeLinks.apple, android: storeLinks.google }[storeLinks.platform];
+  const downloadProps = nativeStoreHref
+    ? { component: 'a', href: nativeStoreHref, target: storeLinks.target }
+    : { onClick: () => handleNavClick('telecharger') };
 
   return (
     <>
@@ -142,11 +157,11 @@ export default function Navbar() {
               <Button
                 variant="outlined"
                 size="small"
-                component={RouterLink}
-                to="/register"
+                startIcon={<DownloadIcon />}
+                {...downloadProps}
                 sx={magentaButtonSx}
               >
-                S'INSCRIRE
+                TÉLÉCHARGER
               </Button>
               <Button
                 variant="outlined"
@@ -159,13 +174,24 @@ export default function Navbar() {
               </Button>
             </Box>
           ) : (
-            <IconButton
-              onClick={() => setDrawerOpen(true)}
-              sx={{ color: '#fff' }}
-              aria-label="Menu"
-            >
-              <MenuIcon />
-            </IconButton>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+              <Button
+                variant="outlined"
+                size="small"
+                startIcon={<DownloadIcon />}
+                {...downloadProps}
+                sx={{ ...magentaButtonSx, px: 1.5, py: 0.6, fontSize: '0.85rem', letterSpacing: 0, '& .MuiButton-startIcon': { mr: 0.75 } }}
+              >
+                Télécharger
+              </Button>
+              <IconButton
+                onClick={() => setDrawerOpen(true)}
+                sx={{ color: '#fff' }}
+                aria-label="Menu"
+              >
+                <MenuIcon />
+              </IconButton>
+            </Box>
           )}
         </Toolbar>
       </AppBar>
@@ -213,16 +239,7 @@ export default function Navbar() {
         </List>
 
         <Box sx={{ px: 2.5, mt: 2, display: 'flex', flexDirection: 'column', gap: 1.5 }}>
-          <Button
-            variant="outlined"
-            component={RouterLink}
-            to="/register"
-            onClick={() => setDrawerOpen(false)}
-            fullWidth
-            sx={magentaButtonSx}
-          >
-            S'INSCRIRE
-          </Button>
+          <StoreButtons />
           <Button
             variant="outlined"
             color="secondary"
